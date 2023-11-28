@@ -12,20 +12,20 @@ public class OutputView {
 
     public void displayPurchasedLottoAmount(LottoNumbers lottoNumbers) {
         System.out.printf("\n%d개를 구매했습니다.\n", lottoNumbers.getSize());
-        printPurchasedLottoNumbers2(lottoNumbers);
+        printPurchasedLottoNumbers(lottoNumbers);
     }
 
-    public void printPurchasedLottoNumbers2(LottoNumbers lottoNumbers) {
+    public void printPurchasedLottoNumbers(LottoNumbers lottoNumbers) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < lottoNumbers.getSize(); i++) {
             Lotto lotto = lottoNumbers.getEachLotto(i);
-            sb.append("[").append(printPurchasedLottoNumbers(lotto)).append("]").append("\n");
+            sb.append("[").append(getPurchasedLottoNumbers(lotto)).append("]").append("\n");
         }
 
         System.out.println(sb);
     }
 
-    public String printPurchasedLottoNumbers(Lotto lotto) {
+    public String getPurchasedLottoNumbers(Lotto lotto) {
         List<Integer> numbers = lotto.getEachLottoNumbers();
 
         return String.join(", ", numbers.stream().map(String::valueOf).toArray(String[]::new));
