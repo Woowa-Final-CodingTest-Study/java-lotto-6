@@ -3,11 +3,11 @@ package lotto.domain;
 import lotto.utils.NumberUtils;
 
 public enum WinningMatch {
-    FIRST_PRIZE(2000000000, 6),
-    SECOND_PRIZE(30000000, 5, true),
-    THIRD_PRIZE(1500000, 5, false),
+    FIFTH_PRIZE(5000, 3),
     FOURTH_PRIZE(50000, 4),
-    FIFTH_PRIZE(5000, 3);
+    THIRD_PRIZE(1500000, 5, false),
+    SECOND_PRIZE(30000000, 5, true),
+    FIRST_PRIZE(2000000000, 6);
 
     private final int prizeMoney;
     private final int matchNumber;
