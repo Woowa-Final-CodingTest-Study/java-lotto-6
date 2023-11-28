@@ -12,7 +12,7 @@ public class BonusNumberController {
         outputView.displayBonusLottoNumberPrompt();
 
         try{
-            int bonusNumber = inputView.inputBonusLottoNumber();
+            int bonusNumber = inputView.inputValue();
             validateBonusNumberRange(bonusNumber);
             return bonusNumber;
         } catch (IllegalArgumentException illegalArgumentException) {

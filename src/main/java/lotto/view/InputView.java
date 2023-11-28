@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 
 public class InputView {
 
-    public String inputPurchaseAmount() {
+    public int inputValue() {
         String input = Console.readLine();
         validateInputValue(input);
-        return input;
+        return Integer.parseInt(input);
     }
 
     public List<Integer> inputWinnerLottoNumbers() {
@@ -19,12 +19,6 @@ public class InputView {
         return Arrays.stream(input.split(","))
                 .map(number -> Integer.parseInt(number))
                 .collect(Collectors.toList());
-    }
-
-    public int inputBonusLottoNumber() {
-        String input = Console.readLine();
-        validateInputValue(input);
-        return Integer.parseInt(input);
     }
 
     private void validateInputValue(String input) {

@@ -23,8 +23,8 @@ public class LottoBuy {
         return lotto;
     }
 
-    public int calculateLottoAmount(String input) {
-        return Integer.parseInt(input) / 1000;
+    public int calculateLottoAmount(int purchaseAmount) {
+        return purchaseAmount / 1000;
     }
 
 }
