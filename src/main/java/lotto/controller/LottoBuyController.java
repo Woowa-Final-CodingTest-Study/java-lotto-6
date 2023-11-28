@@ -12,9 +12,8 @@ public class LottoBuyController {
     OutputView outputView = new OutputView();
     LottoBuy lottoBuy = new LottoBuy();
 
-
     public void printPurchasedLotto(LottoNumbers lottoNumbers) {
-        outputView.displayPurchasedLottoAmount(lottoNumbers);
+        outputView.printPurchasedLottoAmount(lottoNumbers);
     }
 
     public LottoNumbers buyLotto() {

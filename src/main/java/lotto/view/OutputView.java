@@ -10,9 +10,18 @@ public class OutputView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public void displayPurchasedLottoAmount(LottoNumbers lottoNumbers) {
+    public void printPurchasedLottoAmount(LottoNumbers lottoNumbers) {
         System.out.printf("\n%d개를 구매했습니다.\n", lottoNumbers.getSize());
         printPurchasedLottoNumbers(lottoNumbers);
+    }
+
+    public void displayWinnerLottoNumbersPrompt() {
+        System.out.println("당첨 번호를 입력해 주세요");
+    }
+
+    public void displayBonusLottoNumberPrompt() {
+        System.out.println();
+        System.out.println("보너스 번호를 입력해주세요.");
     }
 
     public void printPurchasedLottoNumbers(LottoNumbers lottoNumbers) {
