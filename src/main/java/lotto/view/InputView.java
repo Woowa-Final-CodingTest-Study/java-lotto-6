@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
 
-    public String receiveInputPurchaseAmount() {
+    public String inputPurchaseAmount() {
         String input = Console.readLine();
         validateNull(input);
         validateNumeric(input);
