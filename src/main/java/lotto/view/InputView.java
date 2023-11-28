@@ -17,7 +17,7 @@ public class InputView {
         String input = Console.readLine();
         validateInputWinnerLottoNumbers(input);
         return Arrays.stream(input.split(","))
-                .map(number -> Integer.parseInt(number))
+                .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
