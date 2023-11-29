@@ -1,11 +1,14 @@
 package lotto.controller;
 
+import lotto.constant.ErrorMessageConstant;
 import lotto.domain.LottoBuy;
 import lotto.domain.LottoNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoBuyController {
+
+    private static final int PURCHASE_AMOUNT_UNIT = 1000;
 
     InputView inputView = new InputView();
     OutputView outputView = new OutputView();
@@ -33,8 +36,10 @@ public class LottoBuyController {
     }
 
     private void validatePurchaseUnit(int purchaseAmount) {
-        if (purchaseAmount % 1000 != 0) {
-            throw new IllegalArgumentException("[ERROR] 구입 금액은 1,000원 단위로 입력해주세요.");
+        if (purchaseAmount % PURCHASE_AMOUNT_UNIT != 0) {
+            throw new IllegalArgumentException(ErrorMessageConstant.PREFIX +
+                    ErrorMessageConstant.INPUT_PURCHASE_AMOUNT_UNIT);
         }
     }
+
 }

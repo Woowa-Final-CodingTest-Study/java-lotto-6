@@ -3,39 +3,37 @@ package lotto.view;
 import java.util.List;
 import java.util.Map;
 import lotto.constant.MessageConstant;
+import lotto.constant.Rank;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
 
 public class OutputView {
 
     public void displayLottoPurchasePrompt() {
-        System.out.println("구입금액을 입력해 주세요.");
+        System.out.println(MessageConstant.INPUT_PURCHASE_AMOUNT);
     }
 
     public void printPurchasedLottoAmount(LottoNumbers lottoNumbers) {
-        System.out.printf("\n%d개를 구매했습니다.\n", lottoNumbers.getSize());
+        System.out.printf(MessageConstant.PURCHASED_LOTTO_AMOUNT, lottoNumbers.getSize());
         printPurchasedLottoNumbers(lottoNumbers);
     }
 
     public void displayWinnerLottoNumbersPrompt() {
-        System.out.println("당첨 번호를 입력해 주세요");
+        System.out.println(MessageConstant.INPUT_WINNING_NUMBERS);
     }
 
     public void displayBonusLottoNumberPrompt() {
         System.out.println();
-        System.out.println("보너스 번호를 입력해주세요.");
+        System.out.println(MessageConstant.INPUT_BONUS_NUMBER);
     }
 
     public void printWinningStatistics(Map<String, Integer> ranking) {
-        System.out.println();
-        System.out.println("당첨 통계");
-        System.out.println("---");
-        System.out.printf(MessageConstant.STATISTICS, ranking.get("FIFTH"), ranking.get("FORTH"), ranking.get("THIRD"),
-                ranking.get("SECOND"), ranking.get("FIRST"));
+        System.out.printf(MessageConstant.STATISTICS, ranking.get(Rank.FIFTH.name()), ranking.get(Rank.FORTH.name()),
+                ranking.get(Rank.THIRD.name()), ranking.get(Rank.SECOND.name()), ranking.get(Rank.FIRST.name()));
     }
 
     public void printTotalProfit(String profit) {
-        System.out.println("총 수익률은 " + profit + "%입니다.");
+        System.out.printf(MessageConstant.TOTAL_PROFIT, profit);
     }
 
     public void printPurchasedLottoNumbers(LottoNumbers lottoNumbers) {
@@ -53,4 +51,5 @@ public class OutputView {
 
         return String.join(", ", numbers.stream().map(String::valueOf).toArray(String[]::new));
     }
+
 }
