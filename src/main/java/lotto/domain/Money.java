@@ -16,7 +16,7 @@ public class Money {
             throw new IllegalArgumentException(ErrorMessage.RANGE_ERROR.getMessage());
         }
         if (!isValidUnit(money)) {
-            throw new IllegalArgumentException(ErrorMessage.RANGE_ERROR.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.UNIT_ERROR.getMessage());
         }
     }
 
