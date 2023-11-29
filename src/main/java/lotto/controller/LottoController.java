@@ -10,25 +10,20 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
-    Profit profit;
-    PurchasedLotto purchasedLotto;
-    WinningLotto winningLotto;
-    LottoResult lottoResult;
-
     public void play() {
         int purchaseAmount = enrollPurchaseAmount();
         int purchaseNumber = LottoPurchase.calculatePurchaseNumber(purchaseAmount);
-        purchasedLotto = new PurchasedLotto(purchaseNumber);
-        profit = new Profit(purchaseAmount);
+        PurchasedLotto purchasedLotto = new PurchasedLotto(purchaseNumber);
+        Profit profit = new Profit(purchaseAmount);
 
-        showPurchasedLotto(purchaseNumber);
+        showPurchasedLotto(purchaseNumber, purchasedLotto.getPurchasedLotto());
 
         List<Integer> winningNumbers = enrollWinningNumbers();
         int bonusNumber = enrollBonusNumber(winningNumbers);
-        winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        lottoResult = new LottoResult(purchasedLotto.getWinningResult(winningLotto));
-        showResult();
+        LottoResult lottoResult = new LottoResult(purchasedLotto.getWinningResult(winningLotto));
+        showResult(profit, lottoResult);
     }
 
     private int enrollPurchaseAmount() {
@@ -36,12 +31,12 @@ public class LottoController {
         return InputView.readPurchaseAmount();
     }
 
-    private void showPurchasedLotto(int purchaseNumber) {
+    private void showPurchasedLotto(int purchaseNumber, List<String> purchasedLotto) {
         OutputView.printPurchaseNumber(purchaseNumber);
-        OutputView.printPurchasedLotto(purchasedLotto.getPurchasedLotto());
+        OutputView.printPurchasedLotto(purchasedLotto);
     }
 
-    public void showResult() {
+    private void showResult(Profit profit, LottoResult lottoResult) {
         OutputView.printResult(lottoResult.getResult());
         OutputView.printProfitRatio(profit.getProfitRatio(lottoResult.calculateProfit()));
     }
