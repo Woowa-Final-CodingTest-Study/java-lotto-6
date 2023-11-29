@@ -48,7 +48,7 @@ public enum WinningMatch {
 
     public String getWinningMatchString(WinningMatch winningMatch) {
         String result = "";
-        result += (winningMatch.matchNumber + MATCH_COUNT_UNIT + LOTTO_MATCH);
+        result += (winningMatch.matchNumber + MATCH_COUNT_UNIT + " " + LOTTO_MATCH);
         if (winningMatch.matchNumber == 5 && winningMatch.isBonusMatched) {
             result += ", " + BONUS_BALL + " " + LOTTO_MATCH;
         }
