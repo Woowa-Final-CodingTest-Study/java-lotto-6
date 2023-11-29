@@ -4,7 +4,7 @@ import lotto.utils.ErrorMessage;
 import lotto.utils.NumberConstants;
 
 public class Money {
-    private int money;
+    private final int money;
 
     public Money(int money) {
         validateMoney(money);
@@ -12,16 +12,12 @@ public class Money {
     }
 
     public void validateMoney(int money) {
-        boolean isValidMoney;
-        do {
-            if (!isValidRange(money)) {
-                throw new IllegalArgumentException(ErrorMessage.INVALID_MONEY_RANGE_ERROR.getMessage());
-            }
-            if (!isValidUnit(money)) {
-                throw new IllegalArgumentException(ErrorMessage.INVALID_MONEY_UNIT_ERROR.getMessage());
-            }
-            isValidMoney = true;
-        } while (!isValidMoney);
+        if (!isValidRange(money)) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_MONEY_RANGE_ERROR.getMessage());
+        }
+        if (!isValidUnit(money)) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_MONEY_UNIT_ERROR.getMessage());
+        }
     }
 
     private boolean isValidUnit(int money) {
