@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import static lotto.contants.Words.LOTTO_SIZE;
+import static lotto.contants.Words.MAX_LOTTO_NUMBER;
+import static lotto.contants.Words.MIN_LOTTO_NUMBER;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.List;
@@ -10,18 +12,11 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto() {
-        numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
+        numbers = Randoms.pickUniqueNumbersInRange(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, LOTTO_SIZE);
     }
 
     public Lotto(List<Integer> numbers) {
-        validate(numbers);
-        this.numbers = numbers;
-    }
-
-    private void validate(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException();
-        }
+        this.numbers = List.copyOf(numbers);
     }
 
     public String getNumbersWithComma() {
