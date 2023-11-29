@@ -18,6 +18,7 @@ public class Controller {
             Money money = saveMoney();
             int ticketCount = service.convertToTicket(money);
             Lottos lottos = service.generateUserLottos(ticketCount);
+            printUserLottos(lottos);
 
 
         } catch (IllegalArgumentException e) {
@@ -29,6 +30,10 @@ public class Controller {
     public Money saveMoney() {
         OutputView.printMessage(REQUEST_INPUT_MONEY.getMessage());
         return InputView.requestMoneyInput();
+    }
+
+    public void printUserLottos(Lottos lottos) {
+        OutputView.printMessage(lottos.getUserLottos().toString());
     }
 
 }
