@@ -12,6 +12,7 @@ public class OutputView {
     }
 
     public static void requestBonusNumber() {
+        printEmptyLine();
         System.out.println("보너스 번호를 입력해 주세요.");
     }
 
@@ -32,6 +33,7 @@ public class OutputView {
     }
 
     public static void printResult(List<String> result) {
+        printEmptyLine();
         System.out.println("당첨 통계");
         System.out.println("---");
         for (String s : result) {
