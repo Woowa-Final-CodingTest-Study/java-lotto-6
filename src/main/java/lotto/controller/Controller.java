@@ -12,10 +12,16 @@ public class Controller {
 
     public void init() {
         Money money = saveMoney();
+        int ticketCount = calculateTicketCount(money);
     }
 
     public Money saveMoney() {
         OutputView.printMessage(REQUEST_INPUT_MONEY.getMessage());
         return InputView.requestMoneyInput();
+    }
+
+    public int calculateTicketCount(Money money) {
+        int ticketCount = money.calculateTicketCount();
+        return ticketCount;
     }
 }

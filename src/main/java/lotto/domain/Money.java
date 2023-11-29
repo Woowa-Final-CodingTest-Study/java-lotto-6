@@ -33,4 +33,8 @@ public class Money {
         }
         return false;
     }
+
+    public int calculateTicketCount() {
+        return (money / NumberConstants.MONEY_UNIT.getValue());
+    }
 }
