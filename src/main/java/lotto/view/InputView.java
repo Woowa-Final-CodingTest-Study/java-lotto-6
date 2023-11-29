@@ -51,6 +51,7 @@ public class InputView {
                 int convertedNumber = convertStringToInt(numberString);
                 validateLottoNumberRange(convertedNumber);
                 validateNumberDuplication(convertedNumber, winningNumbers);
+                winningNumbers.add(convertedNumber);
             }
             return winningNumbers;
         } catch (IllegalArgumentException e) {
