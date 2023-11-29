@@ -25,7 +25,7 @@ public enum WinningMatch {
         this.isBonusMatched = isBonusMatched;
     }
 
-    static WinningMatch getWinningMatch(int matchNumber, boolean isBonusMatched) {
+    public static WinningMatch getWinningMatch(int matchNumber, boolean isBonusMatched) {
         if (matchNumber == 5) {
             if (isBonusMatched) {
                 return SECOND_PRIZE;
