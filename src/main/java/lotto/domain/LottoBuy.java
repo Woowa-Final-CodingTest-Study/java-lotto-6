@@ -18,7 +18,8 @@ public class LottoBuy {
     }
 
     public Lotto generateLottoNumber() {
-        Lotto lotto = new Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6));
+        List<Integer> lottoNumbers = new ArrayList<>(Randoms.pickUniqueNumbersInRange(1, 45, 6));
+        Lotto lotto = new Lotto(lottoNumbers);
 
         return lotto;
     }
