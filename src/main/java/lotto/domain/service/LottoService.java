@@ -1,14 +1,15 @@
-package lotto.domain;
+package lotto.domain.service;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import lotto.view.OutputView;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.domain.Money;
+import lotto.domain.NumberGenerator;
 
-public class Service {
+public class LottoService {
     NumberGenerator generator = new NumberGenerator();
+
     public int convertToTicket(Money money) {
         int ticketCount = money.calculateTicketCount();
         return ticketCount;
@@ -21,14 +22,5 @@ public class Service {
             lottos.add(lotto);
         }
         return new Lottos(lottos);
-    }
-
-    public double calculateRateOfReturn(Map<Rank, Integer> rankCount, Money money) {
-        double totalPrizeMoney = 0;
-
-        for (Map.Entry<Rank, Integer> entry : rankCount.entrySet()) {
-            totalPrizeMoney += entry.getKey().getPrizeMoney() * entry.getValue();
-        }
-        return (totalPrizeMoney / money.getMoney()) * 100;
     }
 }
