@@ -6,11 +6,21 @@ import lotto.domain.Money;
 import lotto.domain.WinningNumbers;
 
 public class Controller {
-    MoneyController moneyController = new MoneyController();
-    LottoController lottoController = new LottoController();
-    WinningNumberController winningNumberController = new WinningNumberController();
-    BonusController bonusController = new BonusController();
-    ResultController resultController = new ResultController();
+    private final MoneyController moneyController;
+    private final LottoController lottoController;
+    private final WinningNumberController winningNumberController;
+    private final BonusController bonusController;
+    private final ResultController resultController;
+
+    public Controller(MoneyController moneyController, LottoController lottoController,
+                      WinningNumberController winningNumberController, BonusController bonusController,
+                      ResultController resultController) {
+        this.moneyController = moneyController;
+        this.lottoController = lottoController;
+        this.winningNumberController = winningNumberController;
+        this.bonusController = bonusController;
+        this.resultController = resultController;
+    }
 
     public void init() {
         Money money = moneyController.receiveMoney();

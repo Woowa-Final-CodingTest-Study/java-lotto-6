@@ -8,7 +8,11 @@ import lotto.domain.Money;
 import lotto.domain.NumberGenerator;
 
 public class LottoService {
-    NumberGenerator generator = new NumberGenerator();
+    private final NumberGenerator generator;
+
+    public LottoService(NumberGenerator generator) {
+        this.generator = generator;
+    }
 
     public int convertToTicket(Money money) {
         int ticketCount = money.calculateTicketCount();
