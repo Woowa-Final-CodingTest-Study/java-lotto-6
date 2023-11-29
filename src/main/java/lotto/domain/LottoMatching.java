@@ -4,21 +4,15 @@ import java.util.List;
 
 public class LottoMatching {
 
-    public int matchingLottoNumbers(List<Integer> lottoNumber, List<Integer> winningNumbers) {
-        int matchingCount = 0;
-        for(int winningNumber : winningNumbers) {
-            if(lottoNumber.contains(winningNumber)) {
-                matchingCount++;
-            }
-        }
-        return matchingCount;
+    public int matchingLottoNumbers(List<Integer> lottoNumbers, List<Integer> winningNumbers) {
+        return (int) lottoNumbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
     }
 
-    public boolean matchingBonusNumber(List<Integer> lottoNumber, int bonusNumber) {
-        if(lottoNumber.contains(bonusNumber)) {
-            return true;
-        }
-        return false;
+    public boolean matchingBonusNumber(List<Integer> lottoNumbers, int bonusNumber) {
+
+        return lottoNumbers.contains(bonusNumber);
     }
 
 }
