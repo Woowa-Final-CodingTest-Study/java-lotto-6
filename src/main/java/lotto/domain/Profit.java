@@ -3,6 +3,7 @@ package lotto.domain;
 import static lotto.utils.NumberUtils.formatPercentage;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Profit {
     int purchaseAmount;
@@ -19,7 +20,7 @@ public class Profit {
         BigDecimal accurateProfit = BigDecimal.valueOf(profit);
         BigDecimal accuratePurchaseAmount = BigDecimal.valueOf(purchaseAmount);
 
-        return accurateProfit.divide(accuratePurchaseAmount);
+        return accurateProfit.divide(accuratePurchaseAmount, 10, RoundingMode.DOWN);
     }
 
     public String getProfitRatio(int profit) {
