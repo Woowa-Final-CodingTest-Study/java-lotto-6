@@ -17,7 +17,7 @@ public class LottoController {
 
     public void play() {
         int purchaseAmount = enrollPurchaseAmount();
-        int purchaseNumber = LottoPurchase.calculatePurchaseNumber(profit.getPurchaseAmount());
+        int purchaseNumber = LottoPurchase.calculatePurchaseNumber(purchaseAmount);
         purchasedLotto = new PurchasedLotto(purchaseNumber);
         profit = new Profit(purchaseAmount);
 
