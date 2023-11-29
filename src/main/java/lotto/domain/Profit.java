@@ -12,10 +12,6 @@ public class Profit {
         this.purchaseAmount = purchaseAmount;
     }
 
-    public int getPurchaseAmount() {
-        return purchaseAmount;
-    }
-
     private BigDecimal calculateProfitRatio(int profit) {
         BigDecimal accurateProfit = BigDecimal.valueOf(profit);
         BigDecimal accuratePurchaseAmount = BigDecimal.valueOf(purchaseAmount);

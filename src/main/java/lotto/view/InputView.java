@@ -1,22 +1,22 @@
 package lotto.view;
 
+import static lotto.contants.ErrorMessage.NEED_APPROPRIATE_LOTTO_LENGTH;
+import static lotto.contants.ErrorMessage.NEED_APPROPRIATE_LOTTO_NUMBER_RANGE;
+import static lotto.contants.ErrorMessage.NEED_INTEGER;
+import static lotto.contants.ErrorMessage.NEED_LESS_THAN_MAX_WON;
+import static lotto.contants.ErrorMessage.NEED_NUMBER_THAT_CAN_DIVIDE;
+import static lotto.contants.ErrorMessage.NUMBER_DUPLICATED;
+import static lotto.contants.Words.LOTTO_PRICE;
+import static lotto.contants.Words.LOTTO_SIZE;
+import static lotto.contants.Words.MAX_LOTTO_NUMBER;
+import static lotto.contants.Words.MAX_PURCHASE_AMOUNT;
+import static lotto.contants.Words.MIN_LOTTO_NUMBER;
+
 import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InputView {
-    public static String readNumber() {
-        return Console.readLine();
-    }
-
-    public static int convertStringToInt(String num) {
-        try {
-            return Integer.parseInt(num);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("입력된 수는 정수여야 합니다");
-        }
-    }
-
     public static int readPurchaseAmount() {
         try {
             int purchaseAmount = convertStringToInt(readNumber());
@@ -26,18 +26,6 @@ public class InputView {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return readPurchaseAmount();
-        }
-    }
-
-    public static void validateAmountOverMax(int purchaseAmount) {
-        if (purchaseAmount > 10000000) {
-            throw new IllegalArgumentException("입력된 수는 1000만원 이하여야 합니다.");
-        }
-    }
-
-    public static void validateAmountDivisible(int purchaseAmount) {
-        if (purchaseAmount % 1000 != 0) {
-            throw new IllegalArgumentException("입력된 수는 1000으로 나누어 떨어져야 합니다.");
         }
     }
 
@@ -60,24 +48,6 @@ public class InputView {
         }
     }
 
-    public static void validateWinningLength(String[] winningNumbers) {
-        if (winningNumbers.length != 6) {
-            throw new IllegalArgumentException("숫자는 6개여야 합니다");
-        }
-    }
-
-    public static void validateLottoNumberRange(int lottoNumber) {
-        if (lottoNumber < 1 || lottoNumber > 45) {
-            throw new IllegalArgumentException("로또번호는 1~45 사이 수여야 합니다");
-        }
-    }
-
-    public static void validateNumberDuplication(int targetNumber, List<Integer> numbers) {
-        if (numbers.contains(targetNumber)) {
-            throw new IllegalArgumentException("숫자가 중복되었습니다.");
-        }
-    }
-
     public static int readBonusNumber(List<Integer> winningNumbers) {
         try {
             int bonusNumber = convertStringToInt(readNumber());
@@ -87,6 +57,48 @@ public class InputView {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return readBonusNumber(winningNumbers);
+        }
+    }
+
+    public static String readNumber() {
+        return Console.readLine();
+    }
+
+    public static int convertStringToInt(String num) {
+        try {
+            return Integer.parseInt(num);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(NEED_INTEGER);
+        }
+    }
+
+    public static void validateAmountOverMax(int purchaseAmount) {
+        if (purchaseAmount > MAX_PURCHASE_AMOUNT) {
+            throw new IllegalArgumentException(NEED_LESS_THAN_MAX_WON);
+        }
+    }
+
+    public static void validateAmountDivisible(int purchaseAmount) {
+        if (purchaseAmount % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException(NEED_NUMBER_THAT_CAN_DIVIDE);
+        }
+    }
+
+    public static void validateWinningLength(String[] winningNumbers) {
+        if (winningNumbers.length != LOTTO_SIZE) {
+            throw new IllegalArgumentException(NEED_APPROPRIATE_LOTTO_LENGTH);
+        }
+    }
+
+    public static void validateLottoNumberRange(int lottoNumber) {
+        if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(NEED_APPROPRIATE_LOTTO_NUMBER_RANGE);
+        }
+    }
+
+    public static void validateNumberDuplication(int targetNumber, List<Integer> numbers) {
+        if (numbers.contains(targetNumber)) {
+            throw new IllegalArgumentException(NUMBER_DUPLICATED);
         }
     }
 }

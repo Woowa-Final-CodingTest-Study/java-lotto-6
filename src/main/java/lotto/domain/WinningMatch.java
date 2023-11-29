@@ -1,5 +1,10 @@
 package lotto.domain;
 
+import static lotto.contants.Words.BONUS_BALL;
+import static lotto.contants.Words.LOTTO_MATCH;
+import static lotto.contants.Words.MATCH_COUNT_UNIT;
+import static lotto.contants.Words.WON;
+
 import lotto.utils.NumberUtils;
 
 public enum WinningMatch {
@@ -43,11 +48,11 @@ public enum WinningMatch {
 
     public String getWinningMatchString(WinningMatch winningMatch) {
         String result = "";
-        result += (winningMatch.matchNumber + "개 일치");
+        result += (winningMatch.matchNumber + MATCH_COUNT_UNIT + LOTTO_MATCH);
         if (winningMatch.matchNumber == 5 && winningMatch.isBonusMatched) {
-            result += ", 보너스 볼 일치";
+            result += ", " + BONUS_BALL + " " + LOTTO_MATCH;
         }
-        result += (" (" + NumberUtils.formatCurrency(winningMatch.prizeMoney) + "원)");
+        result += (" (" + NumberUtils.formatCurrency(winningMatch.prizeMoney) + WON + ")");
         return result;
     }
 

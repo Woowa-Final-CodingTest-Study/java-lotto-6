@@ -1,19 +1,24 @@
 package lotto.view;
 
+import static lotto.contants.SystemMessage.REQUEST_BONUS_NUMBER;
+import static lotto.contants.SystemMessage.REQUEST_PURCHASE_AMOUNT;
+import static lotto.contants.SystemMessage.REQUEST_WINNING_NUMBER;
+import static lotto.contants.Words.WINNING_RESULT;
+
 import java.util.List;
 
 public class OutputView {
     public static void requestPurchaseAmount() {
-        System.out.println("구입금액을 입력해 주세요.");
+        System.out.println(REQUEST_PURCHASE_AMOUNT);
     }
 
     public static void requestWinningNumbers() {
-        System.out.println("당첨 번호를 입력해 주세요.");
+        System.out.println(REQUEST_WINNING_NUMBER);
     }
 
     public static void requestBonusNumber() {
         printEmptyLine();
-        System.out.println("보너스 번호를 입력해 주세요.");
+        System.out.println(REQUEST_BONUS_NUMBER);
     }
 
     public static void printPurchaseNumber(int purchaseNumber) {
@@ -34,7 +39,7 @@ public class OutputView {
 
     public static void printResult(List<String> result) {
         printEmptyLine();
-        System.out.println("당첨 통계");
+        System.out.println(WINNING_RESULT);
         System.out.println("---");
         for (String s : result) {
             System.out.println(s);

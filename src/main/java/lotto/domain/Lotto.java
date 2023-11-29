@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.contants.Words.LOTTO_SIZE;
+
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +19,7 @@ public class Lotto {
     }
 
     private void validate(List<Integer> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException();
         }
     }

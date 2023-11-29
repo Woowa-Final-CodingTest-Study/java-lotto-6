@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.contants.Words.MATCH_COUNT_UNIT;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +28,7 @@ public class LottoResult {
             if (matchResult.containsKey(winningMatch)) {
                 number = matchResult.get(winningMatch);
             }
-            match += number + "개";
+            match += number + MATCH_COUNT_UNIT;
             result.add(match);
         }
         return result;
