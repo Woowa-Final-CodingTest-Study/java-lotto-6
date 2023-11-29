@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.controller.BonusController;
-import lotto.controller.Controller;
+import lotto.controller.MainController;
 import lotto.controller.LottoController;
 import lotto.controller.MoneyController;
 import lotto.controller.ResultController;
@@ -15,7 +15,7 @@ public class Application {
         BonusController bonusController = new BonusController();
         ResultController resultController = new ResultController();
 
-        Controller controller = new Controller(moneyController, lottoController, winningNumberController, bonusController, resultController);
+        MainController controller = new MainController(moneyController, lottoController, winningNumberController, bonusController, resultController);
         controller.init();
     }
 }
