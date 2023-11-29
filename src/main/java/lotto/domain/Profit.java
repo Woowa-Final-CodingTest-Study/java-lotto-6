@@ -15,14 +15,14 @@ public class Profit {
         return purchaseAmount;
     }
 
-    static BigDecimal calculateProfitRatio(int profit) {
+    private BigDecimal calculateProfitRatio(int profit) {
         BigDecimal accurateProfit = BigDecimal.valueOf(profit);
         BigDecimal accuratePurchaseAmount = BigDecimal.valueOf(purchaseAmount);
 
         return accurateProfit.divide(accuratePurchaseAmount);
     }
 
-    public static String getProfitRatio(int profit) {
+    public String getProfitRatio(int profit) {
         BigDecimal profitRatio = calculateProfitRatio(profit).multiply(new BigDecimal(100));
         return formatPercentage(profitRatio);
     }
