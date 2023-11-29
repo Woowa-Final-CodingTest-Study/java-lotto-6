@@ -11,8 +11,8 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printException(String errorMessage) {
-        System.out.println(errorMessage);
+    public static void printException(Exception exception) {
+        System.out.println(exception.getMessage());
     }
 
 }

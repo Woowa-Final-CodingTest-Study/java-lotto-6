@@ -12,26 +12,30 @@ public class Money {
     }
 
     public void validateMoney(int money) {
-        if (!isValidUnit(money)) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_MONEY_UNIT_ERROR.getMessage());
-        }
-        if (!isValidRange(money)) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_MONEY_RANGE_ERROR.getMessage());
-        }
+        boolean isValidMoney;
+        do {
+            if (!isValidRange(money)) {
+                throw new IllegalArgumentException(ErrorMessage.INVALID_MONEY_RANGE_ERROR.getMessage());
+            }
+            if (!isValidUnit(money)) {
+                throw new IllegalArgumentException(ErrorMessage.INVALID_MONEY_UNIT_ERROR.getMessage());
+            }
+            isValidMoney = true;
+        } while (!isValidMoney);
     }
 
     private boolean isValidUnit(int money) {
-        if (money / NumberConstants.MONEY_UNIT.getValue() != 0) {
+        if (money % NumberConstants.MONEY_UNIT.getValue() != 0) {
             return false;
         }
         return true;
     }
 
     private boolean isValidRange(int money) {
-        if (money >= NumberConstants.MIN_MONEY.getValue() || money <= NumberConstants.MAX_MONEY.getValue()) {
-            return true;
+        if (money < NumberConstants.MIN_MONEY.getValue() || money > NumberConstants.MAX_MONEY.getValue()) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     public int calculateTicketCount() {

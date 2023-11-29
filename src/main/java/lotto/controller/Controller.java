@@ -7,12 +7,15 @@ import lotto.domain.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class Controller {
-    LottoManager lottoManager = new LottoManager();
 
+public class Controller {
     public void init() {
-        Money money = saveMoney();
-        int ticketCount = calculateTicketCount(money);
+        try {
+            Money money = saveMoney();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            init();
+        }
     }
 
     public Money saveMoney() {
