@@ -1,6 +1,7 @@
 package lotto.contants;
 
 public class ErrorMessage {
+    public static final String ERROR = "[ERROR]";
     public static final String NEED_INTEGER = "입력된 수는 정수여야 합니다";
     public static final String NEED_LESS_THAN_MAX_WON = "입력된 수는 1000만원 이하여야 합니다.";
     public static final String NEED_NUMBER_THAT_CAN_DIVIDE = "입력된 수는 1000만원 이하여야 합니다.";

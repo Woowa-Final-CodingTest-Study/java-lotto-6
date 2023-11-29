@@ -1,5 +1,6 @@
 package lotto.view;
 
+import static lotto.contants.ErrorMessage.ERROR;
 import static lotto.contants.ErrorMessage.NEED_APPROPRIATE_LOTTO_LENGTH;
 import static lotto.contants.ErrorMessage.NEED_APPROPRIATE_LOTTO_NUMBER_RANGE;
 import static lotto.contants.ErrorMessage.NEED_INTEGER;
@@ -64,41 +65,46 @@ public class InputView {
         return Console.readLine();
     }
 
+    public static IllegalArgumentException throwErrorMessage(String message) {
+        throw new IllegalArgumentException(ERROR + " " + message);
+    }
+
+
     public static int convertStringToInt(String num) {
         try {
             return Integer.parseInt(num);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(NEED_INTEGER);
+            throw throwErrorMessage(NEED_INTEGER);
         }
     }
 
     public static void validateAmountOverMax(int purchaseAmount) {
         if (purchaseAmount > MAX_PURCHASE_AMOUNT) {
-            throw new IllegalArgumentException(NEED_LESS_THAN_MAX_WON);
+            throw throwErrorMessage(NEED_LESS_THAN_MAX_WON);
         }
     }
 
     public static void validateAmountDivisible(int purchaseAmount) {
         if (purchaseAmount % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException(NEED_NUMBER_THAT_CAN_DIVIDE);
+            throw throwErrorMessage(NEED_NUMBER_THAT_CAN_DIVIDE);
         }
     }
 
     public static void validateWinningLength(String[] winningNumbers) {
         if (winningNumbers.length != LOTTO_SIZE) {
-            throw new IllegalArgumentException(NEED_APPROPRIATE_LOTTO_LENGTH);
+            throw throwErrorMessage(NEED_APPROPRIATE_LOTTO_LENGTH);
         }
     }
 
     public static void validateLottoNumberRange(int lottoNumber) {
         if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(NEED_APPROPRIATE_LOTTO_NUMBER_RANGE);
+            throw throwErrorMessage(NEED_APPROPRIATE_LOTTO_NUMBER_RANGE);
         }
     }
 
     public static void validateNumberDuplication(int targetNumber, List<Integer> numbers) {
         if (numbers.contains(targetNumber)) {
-            throw new IllegalArgumentException(NUMBER_DUPLICATED);
+            throw throwErrorMessage(NUMBER_DUPLICATED);
         }
     }
 }
