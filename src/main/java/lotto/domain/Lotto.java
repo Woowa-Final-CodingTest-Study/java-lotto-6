@@ -17,6 +17,12 @@ public class Lotto {
         }
     }
 
+    public Rank match(WinningNumbers winningNumbers, Bonus bonus) {
+        int countOfMatch = countMatchingNumbers(winningNumbers);
+        boolean matchBonus = containsBonusNumber(bonus);
+        return Rank.calculateRank(countOfMatch, matchBonus);
+    }
+
     public int countMatchingNumbers(WinningNumbers winningNumbers) {
         int count = 0;
         for (Integer number : this.numbers) {
@@ -25,12 +31,6 @@ public class Lotto {
             }
         }
         return count;
-    }
-
-    public Rank match(WinningNumbers winningNumbers, Bonus bonus) {
-        int countOfMatch = countMatchingNumbers(winningNumbers);
-        boolean matchBonus = containsBonusNumber(bonus);
-        return Rank.calculateRank(countOfMatch, matchBonus);
     }
 
     public boolean containsBonusNumber(Bonus bonus) {

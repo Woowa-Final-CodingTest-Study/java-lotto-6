@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Optional;
 
 public enum Rank {
     MATCH_0(0, 0, 0),
@@ -36,21 +34,12 @@ public enum Rank {
         return MATCH_0;
     }
 
-
     public int getCountOfMatch() {
         return countOfMatch;
     }
 
     public int getPrizeMoney() {
         return prizeMoney;
-    }
-
-    public int getCountOfWin() {
-        return countOfWin;
-    }
-
-    public boolean isMatchBonus() {
-        return matchBonus;
     }
 }
 

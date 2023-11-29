@@ -3,14 +3,11 @@ package lotto.domain;
 import static lotto.utils.NumberConstants.LOTTO_MAX_NUMBER;
 import static lotto.utils.NumberConstants.LOTTO_MIN_NUMBER;
 import static lotto.utils.NumberConstants.LOTTO_NUMBER_COUNTS;
-import static lotto.utils.NumberConstants.MAX_MONEY;
-import static lotto.utils.NumberConstants.MIN_MONEY;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import lotto.utils.ErrorMessage;
-import lotto.utils.NumberConstants;
 
 public class WinningNumbers {
     private List<Integer> winningNumbers;

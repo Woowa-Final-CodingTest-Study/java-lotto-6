@@ -1,12 +1,15 @@
 package lotto.view;
 
+import static lotto.utils.GameMessage.EARNING_RATE;
+import static lotto.utils.GameMessage.PRIZE_MONEY;
+import static lotto.utils.GameMessage.WINNING_STATISTICS;
+
 import java.util.Map;
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.Rank;
-import lotto.utils.ErrorMessage;
 
 public class OutputView {
-
     public static void printUserLottos(Lotto lotto) {
         System.out.println(lotto);
     }
@@ -14,22 +17,29 @@ public class OutputView {
         System.out.println(message);
     }
 
+    public static void printUserLottos(Lottos lottos, int ticketcount) {
+        OutputView.printMessage(ticketcount + "개를 구매했습니다.");
+        for (Lotto lotto : lottos.getUserLottos()) {
+            OutputView.printUserLottos(lotto);
+        }
+    }
+
     public static void printWinningStatistics(Map<Rank, Integer> rankCount) {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        printMessage("당첨 통계");
+        printMessage("---------");
         for (Rank rank : Rank.values()) {
             if (rank.getCountOfMatch() > 0) {
-                System.out.printf("%d개 일치 (%s원) - %d개\n", rank.getCountOfMatch(), formatPrizeMoney(rank.getPrizeMoney()),
+                System.out.printf(WINNING_STATISTICS.getMessage(), rank.getCountOfMatch(), formatPrizeMoney(rank.getPrizeMoney()),
                         rankCount.getOrDefault(rank, 0));
             }
         }
     }
 
     private static String formatPrizeMoney(int prizeMoney) {
-        return String.format("%,d", prizeMoney);
+        return String.format(PRIZE_MONEY.getMessage(), prizeMoney);
     }
 
     public static void printRateOfReturn(double rateOfReturn) {
-        System.out.printf("총 수익률은 %.2f%%입니다.\n", rateOfReturn);
+        System.out.printf(EARNING_RATE.getMessage(), rateOfReturn);
     }
 }

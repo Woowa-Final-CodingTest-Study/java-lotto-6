@@ -23,23 +23,6 @@ public class Service {
         return new Lottos(lottos);
     }
 
-    public void printUserLottos(Lottos lottos, int ticketcount) {
-        OutputView.printMessage(ticketcount + "개를 구매했습니다.");
-        for (Lotto lotto : lottos.getUserLottos()) {
-            OutputView.printUserLottos(lotto);
-        }
-    }
-
-    public Map<Rank, Integer> calculateRankCount(Lottos lottos, WinningNumbers winningNumbers, Bonus bonus) {
-        Map<Rank, Integer> rankCount = new HashMap<>();
-
-        for (Lotto lotto : lottos.getUserLottos()) {
-            Rank rank = lotto.match(winningNumbers, bonus);
-            rankCount.put(rank, rankCount.getOrDefault(rank, 0) + 1);
-        }
-        return rankCount;
-    }
-
     public double calculateRateOfReturn(Map<Rank, Integer> rankCount, Money money) {
         double totalPrizeMoney = 0;
 
