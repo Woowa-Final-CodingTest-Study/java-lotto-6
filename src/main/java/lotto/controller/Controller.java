@@ -2,7 +2,6 @@ package lotto.controller;
 
 import static lotto.utils.GameMessage.REQUEST_INPUT_MONEY;
 
-import lotto.domain.LottoManager;
 import lotto.domain.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -13,7 +12,7 @@ public class Controller {
         try {
             Money money = saveMoney();
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            OutputView.printMessage(e.getMessage());
             init();
         }
     }

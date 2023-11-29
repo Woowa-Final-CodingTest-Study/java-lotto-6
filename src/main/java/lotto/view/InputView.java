@@ -6,10 +6,13 @@ import lotto.utils.ErrorMessage;
 
 public class InputView {
     public static Money requestMoneyInput() {
-        int money = 0;
+        int money = -1;
         do {
             String input = Console.readLine();
             money = convertToInteger(input);
+            if (money == -1) {
+                throw new IllegalArgumentException(ErrorMessage.INVALID_MONEY_NOT_INTEGER_ERROR.getMessage());
+            }
         } while (money == -1);
         return new Money(money);
     }
@@ -18,7 +21,7 @@ public class InputView {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_MONEY_NOT_INTEGER_ERROR.getMessage());
+            return -1;
         }
     }
 }
