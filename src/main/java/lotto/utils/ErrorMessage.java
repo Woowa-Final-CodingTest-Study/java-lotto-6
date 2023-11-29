@@ -6,6 +6,8 @@ public enum ErrorMessage {
     INVALID_MONEY_RANGE_ERROR("[ERROR] 구입금액의 범위가 올바르지 않습니다.");
 
 
+
+
     private final String message;
 
     ErrorMessage(String message) {
