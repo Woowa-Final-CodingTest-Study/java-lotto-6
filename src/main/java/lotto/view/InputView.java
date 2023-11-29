@@ -1,11 +1,22 @@
 package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class InputView {
+    public static String readNumber() {
+        return Console.readLine();
+    }
+
+    public static int convertStringToInt(String num) {
+        try {
+            return Integer.parseInt(num);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("입력된 수는 정수여야 합니다");
+        }
+    }
+
     public static int readPurchaseAmount() {
         try {
             int purchaseAmount = convertStringToInt(readNumber());
@@ -15,14 +26,6 @@ public class InputView {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return readPurchaseAmount();
-        }
-    }
-
-    public static int convertStringToInt(String num) {
-        try {
-            return Integer.parseInt(num);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("입력된 수는 정수여야 합니다");
         }
     }
 
@@ -39,16 +42,42 @@ public class InputView {
     }
 
     public static List<Integer> readWinningNumbers() {
-        return Arrays.stream(Console.readLine().split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        try {
+            List<Integer> winningNumbers = new ArrayList<>();
+            String[] parsedNumbers = readNumber().split(",");
+            validateWinningLength(parsedNumbers);
+
+            for (String numberString : parsedNumbers) {
+                int convertedNumber = convertStringToInt(numberString);
+                validateLottoNumberRange(convertedNumber);
+                validateNumberDuplication(convertedNumber, winningNumbers);
+            }
+            return winningNumbers;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return readWinningNumbers();
+        }
+    }
+
+    public static void validateWinningLength(String[] winningNumbers) {
+        if (winningNumbers.length != 6) {
+            throw new IllegalArgumentException("숫자는 6개여야 합니다");
+        }
+    }
+
+    public static void validateLottoNumberRange(int lottoNumber) {
+        if (lottoNumber < 1 || lottoNumber > 45) {
+            throw new IllegalArgumentException("로또번호는 1~45 사이 수여야 합니다");
+        }
+    }
+
+    public static void validateNumberDuplication(int targetNumber, List<Integer> numbers) {
+        if (numbers.contains(targetNumber)) {
+            throw new IllegalArgumentException("숫자가 중복되었습니다.");
+        }
     }
 
     public static int readBonusNumber() {
         return Integer.parseInt(Console.readLine());
-    }
-
-    public static String readNumber() {
-        return Console.readLine();
     }
 }
