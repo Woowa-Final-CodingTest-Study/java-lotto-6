@@ -5,17 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Service {
+    NumberGenerator generator = new NumberGenerator();
     public int convertToTicket(Money money) {
         int ticketCount = money.calculateTicketCount();
         return ticketCount;
     }
 
-    public Lotto generateLottoTicket(int ticketCount) {
-        List<Integer> numbers = new ArrayList<>();
+    public Lottos generateUserLottos(int ticketCount) {
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < ticketCount; i++) {
-            int number = Randoms.pickNumberInRange(1,45);
-            numbers.add(number);
+            Lotto lotto = new Lotto(generator.createRandomNumbers());
+            lottos.add(lotto);
         }
-        return new Lotto(numbers);
+        return new Lottos(lottos);
     }
 }

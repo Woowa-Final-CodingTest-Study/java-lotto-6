@@ -3,6 +3,7 @@ package lotto.controller;
 import static lotto.utils.GameMessage.REQUEST_INPUT_MONEY;
 
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Service;
 import lotto.view.InputView;
@@ -16,7 +17,7 @@ public class Controller {
         try {
             Money money = saveMoney();
             int ticketCount = service.convertToTicket(money);
-            Lotto lotto = service.generateLottoTicket(ticketCount);
+            Lottos lottos = service.generateUserLottos(ticketCount);
 
 
         } catch (IllegalArgumentException e) {
