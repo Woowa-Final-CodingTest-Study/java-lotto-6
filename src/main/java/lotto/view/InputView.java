@@ -38,7 +38,7 @@ public class InputView {
             for (String numberString : parsedNumbers) {
                 int convertedNumber = convertStringToInt(numberString);
                 validateLottoNumberRange(convertedNumber);
-                validateNumberDuplication(convertedNumber, winningNumbers);
+                validateNumberDuplication(convertedNumber, List.copyOf(winningNumbers));
                 winningNumbers.add(convertedNumber);
             }
             return winningNumbers;
