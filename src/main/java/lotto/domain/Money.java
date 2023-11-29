@@ -13,10 +13,10 @@ public class Money {
 
     public void validateMoney(int money) {
         if (!isValidRange(money)) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_MONEY_RANGE_ERROR.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.RANGE_ERROR.getMessage());
         }
         if (!isValidUnit(money)) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_MONEY_UNIT_ERROR.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.RANGE_ERROR.getMessage());
         }
     }
 

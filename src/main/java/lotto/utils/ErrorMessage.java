@@ -1,14 +1,12 @@
 package lotto.utils;
 
 public enum ErrorMessage {
-    INVALID_MONEY_UNIT_ERROR("[ERROR] 단위는 1,000원이어야 합니다."),
-    INVALID_MONEY_NOT_INTEGER_ERROR("[ERROR] 구입금액은 정수를 입력해야 합니다."),
-    INVALID_MONEY_RANGE_ERROR("[ERROR] 구입금액의 범위가 올바르지 않습니다."),
-    INVALID_NOT_INTEGER_ERROR("[ERROR] 정수를 입력해야 합니다."),
-    DUPLICATE_BONUS_ERROR("[ERROR] 당첨번호와 보너스는 중복될 수 없습니다");
-
-
-
+    UNIT_ERROR("[ERROR] 단위는 1,000원이어야 합니다."),
+    NOT_INTEGER_ERROR("[ERROR] 정수를 입력해야 합니다."),
+    RANGE_ERROR("[ERROR] 범위가 올바르지 않습니다."),
+    DUPLICATE_WINNING_NUMBER_ERROR("[ERROR] 당첨번호는 중복될 수 없습니다."),
+    DUPLICATE_BONUS_ERROR("[ERROR] 당첨번호와 보너스는 중복될 수 없습니다."),
+    NOT_SIX_WINNING_NUMBER_ERROR("[ERROR] 당첨번호는 6개를 입력해야 합니다.");
 
 
     private final String message;

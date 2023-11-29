@@ -4,6 +4,7 @@ import static lotto.utils.GameMessage.REQUEST_BONUS_INPUT;
 import static lotto.utils.GameMessage.REQUEST_INPUT_MONEY;
 import static lotto.utils.GameMessage.REQUEST_WINNING_NUMBERS_INPUT;
 
+import java.util.Map;
 import lotto.domain.Bonus;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
@@ -24,6 +25,7 @@ public class Controller {
         service.printUserLottos(lottos, ticketCount);
         WinningNumbers winningNumbers = enrollWinningNumbers();
         Bonus bonus = enrollBonus(winningNumbers);
+        // Map<Rank, Integer> rankCount = checkLottoGameResult(lottos, winningNumbers, bonus);
     }
 
     public Money enrollMoney() {
@@ -70,5 +72,16 @@ public class Controller {
         } while (bonus == null);
         return bonus;
     }
+
+//    private Map<Rank, Integer> checkLottoGameResult(Lottos lottos, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+//        Map<Rank, Integer> rankCount = service.calculateRankCount(lottos, winningNumbers, bonusNumber);
+//        OutputView.printWinningStatistics();
+//        return rankCount;
+//    }
+//
+//    private void printWinningStatistics(Map<Rank, Integer> rankCount, Money money) {
+//        OutputView.printRankCount(rankCount);
+//        service.printRateOfReturn(rankCount, money);
+//    }
 }
 
