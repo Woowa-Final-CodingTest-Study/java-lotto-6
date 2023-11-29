@@ -38,4 +38,5 @@ public enum Rank {
         }
         return "없음";
     }
+
 }

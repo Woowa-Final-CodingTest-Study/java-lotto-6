@@ -22,4 +22,5 @@ public class LottoNumbers {
     public Lotto getEachLotto(int index) {
         return lottoNumbers.get(index);
     }
+
 }

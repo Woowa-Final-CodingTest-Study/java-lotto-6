@@ -1,10 +1,7 @@
 package lotto.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.constant.MessageConstant;
-import lotto.constant.Rank;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMatching;
 import lotto.domain.LottoNumbers;
@@ -22,6 +19,7 @@ public class LottoRankingController {
     public void printWinningStatistics(LottoNumbers lottoNumbers, Lotto winningLotto, int bonusNumber) {
         Map<String, Integer> ranking = compareLottoNumbers(lottoNumbers, winningLotto, bonusNumber);
         outputView.printWinningStatistics(ranking);
+
         String profit = lottoProfit.generateProfit(ranking, lottoNumbers.getSize());
         outputView.printTotalProfit(profit);
     }
@@ -36,10 +34,12 @@ public class LottoRankingController {
 
             int matchingCount = lottoMatching.matchingLottoNumbers(numbers, winningNumbers);
             boolean existBonus = lottoMatching.matchingBonusNumber(numbers, bonusNumber);
+
             String rank = lottoRank.rankLotto(matchingCount, existBonus);
 
             ranking.put(rank, ranking.getOrDefault(rank, 0)+1);
         }
         return ranking;
     }
+
 }

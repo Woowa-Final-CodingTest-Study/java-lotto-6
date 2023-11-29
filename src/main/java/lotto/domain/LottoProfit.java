@@ -23,4 +23,5 @@ public class LottoProfit {
         String profit = String.format("%.1f", ((double)totalPrize/purchaseAmount)*100);
         return checkUnit.format(Double.parseDouble(profit));
     }
+
 }

@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import lotto.constant.Rank;
 
 public class LottoMatching {
 
@@ -23,8 +20,5 @@ public class LottoMatching {
         }
         return false;
     }
-
-
-
 
 }
