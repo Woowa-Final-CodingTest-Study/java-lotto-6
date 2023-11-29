@@ -33,17 +33,27 @@ public class InputView {
         return new WinningNumbers(winningNumbers);
     }
 
-    public static Bonus requestBonusInput() {
+    public static Bonus requestBonusInput(WinningNumbers winningNumbers) {
         int bonus = -1;
         do {
             String input = Console.readLine();
             bonus = convertToInteger(input);
+            if (bonus != -1) {
+                validateDuplication(winningNumbers, bonus);
+            }
             if (bonus == -1) {
                 throw new IllegalArgumentException(ErrorMessage.INVALID_NOT_INTEGER_ERROR.getMessage());
             }
         } while (bonus == -1);
         return new Bonus(bonus);
     }
+
+    private static void validateDuplication(WinningNumbers winningNumbers, int bonus) {
+        if (winningNumbers.getWinningNumbers().contains(bonus)) {
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_BONUS_ERROR.getMessage());
+        }
+    }
+
 
     private static List<Integer> convertToIntegerList(String input) {
         List<Integer> list = new ArrayList<>();
@@ -57,7 +67,6 @@ public class InputView {
         }
         return list;
     }
-
 
     private static int convertToInteger(String input) {
         try {

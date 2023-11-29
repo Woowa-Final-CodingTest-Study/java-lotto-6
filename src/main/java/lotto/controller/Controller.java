@@ -23,7 +23,7 @@ public class Controller {
         Lottos lottos = service.generateUserLottos(ticketCount);
         service.printUserLottos(lottos, ticketCount);
         WinningNumbers winningNumbers = enrollWinningNumbers();
-        Bonus bonus = enrollBonus();
+        Bonus bonus = enrollBonus(winningNumbers);
     }
 
     public Money enrollMoney() {
@@ -56,12 +56,12 @@ public class Controller {
         return winningNumbers;
     }
 
-    public Bonus enrollBonus() {
+    public Bonus enrollBonus(WinningNumbers winningNumbers) {
         Bonus bonus;
         do {
             try {
                 OutputView.printMessage(REQUEST_BONUS_INPUT.getMessage());
-                bonus = InputView.requestBonusInput();
+                bonus = InputView.requestBonusInput(winningNumbers);
                 return bonus;
             } catch (IllegalArgumentException e) {
                 OutputView.printMessage(e.getMessage());
