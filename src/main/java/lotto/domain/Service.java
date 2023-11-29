@@ -3,6 +3,7 @@ package lotto.domain;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
+import lotto.view.OutputView;
 
 public class Service {
     NumberGenerator generator = new NumberGenerator();
@@ -18,5 +19,12 @@ public class Service {
             lottos.add(lotto);
         }
         return new Lottos(lottos);
+    }
+
+    public void printUserLottos(Lottos lottos, int ticketcount) {
+        OutputView.printMessage(ticketcount + "개를 구매했습니다.");
+        for (Lotto lotto : lottos.getUserLottos()) {
+            OutputView.printUserLottos(lotto);
+        }
     }
 }
