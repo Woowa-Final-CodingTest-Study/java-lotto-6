@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.constant.ErrorMessageConstant;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -26,7 +27,7 @@ public class BonusNumberController {
 
     public void validateBonusNumberRange(int bonusNumber) {
         if (bonusNumber < MIN_NUMBER || bonusNumber > MAX_NUMBER) {
-            throw new IllegalArgumentException("[ERROR] 1부터 45사이의 숫자만 입력해주세요.");
+            throw new IllegalArgumentException(ErrorMessageConstant.PREFIX + ErrorMessageConstant.INPUT_NUMBERS_IN_RANGE);
         }
     }
 
