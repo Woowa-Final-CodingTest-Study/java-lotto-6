@@ -77,7 +77,15 @@ public class InputView {
         }
     }
 
-    public static int readBonusNumber() {
-        return Integer.parseInt(Console.readLine());
+    public static int readBonusNumber(List<Integer> winningNumbers) {
+        try {
+            int bonusNumber = convertStringToInt(readNumber());
+            validateLottoNumberRange(bonusNumber);
+            validateNumberDuplication(bonusNumber, winningNumbers);
+            return bonusNumber;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return readBonusNumber(winningNumbers);
+        }
     }
 }

@@ -24,7 +24,7 @@ public class LottoController {
         showPurchasedLotto(purchaseNumber);
 
         List<Integer> winningNumbers = enrollWinningNumbers();
-        int bonusNumber = enrollBonusNumber();
+        int bonusNumber = enrollBonusNumber(winningNumbers);
         winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         lottoResult = new LottoResult(purchasedLotto.getWinningResult(winningLotto));
@@ -51,8 +51,8 @@ public class LottoController {
         return InputView.readWinningNumbers();
     }
 
-    private int enrollBonusNumber() {
+    private int enrollBonusNumber(List<Integer> winningNumbers) {
         OutputView.requestBonusNumber();
-        return InputView.readBonusNumber();
+        return InputView.readBonusNumber(winningNumbers);
     }
 }
