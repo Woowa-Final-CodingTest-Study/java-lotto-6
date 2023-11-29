@@ -16,9 +16,10 @@ public class LottoController {
     LottoResult lottoResult;
 
     public void play() {
-        enrollPurchaseAmount();
+        int purchaseAmount = enrollPurchaseAmount();
         int purchaseNumber = LottoPurchase.calculatePurchaseNumber(profit.getPurchaseAmount());
         purchasedLotto = new PurchasedLotto(purchaseNumber);
+        profit = new Profit(purchaseAmount);
 
         showPurchasedLotto(purchaseNumber);
 
@@ -30,9 +31,9 @@ public class LottoController {
         showResult();
     }
 
-    private void enrollPurchaseAmount() {
+    private int enrollPurchaseAmount() {
         OutputView.requestPurchaseAmount();
-        profit = new Profit(InputView.readPurchaseAmount());
+        return InputView.readPurchaseAmount();
     }
 
     private void showPurchasedLotto(int purchaseNumber) {
@@ -42,7 +43,7 @@ public class LottoController {
 
     public void showResult() {
         OutputView.printResult(lottoResult.getResult());
-        OutputView.printProfitRatio(profit.getProfitRatio(lottoResult.getProfit()));
+        OutputView.printProfitRatio(profit.getProfitRatio(lottoResult.calculateProfit()));
     }
 
     private List<Integer> enrollWinningNumbers() {

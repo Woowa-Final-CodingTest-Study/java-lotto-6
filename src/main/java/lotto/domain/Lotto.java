@@ -22,7 +22,7 @@ public class Lotto {
         }
     }
 
-    public String getLottoNumbersWithComma() {
+    public String getNumbersWithComma() {
         return numbers.stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "));

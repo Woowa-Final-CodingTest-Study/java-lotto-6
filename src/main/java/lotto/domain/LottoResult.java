@@ -32,7 +32,7 @@ public class LottoResult {
         return result;
     }
 
-    public int getProfit() {
+    public int calculateProfit() {
         int result = 0;
         for (WinningMatch key : matchResult.keySet()) {
             result += key.getPrizeMoney() * matchResult.get(key);

@@ -17,7 +17,7 @@ public class PurchasedLotto {
     public List<String> getPurchasedLotto() {
         List<String> purchasedLotto = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            purchasedLotto.add(lotto.getLottoNumbersWithComma());
+            purchasedLotto.add(lotto.getNumbersWithComma());
         }
         return purchasedLotto;
     }
