@@ -32,9 +32,9 @@ public class InputView {
         validateWinnerNumberNumeric(input);
     }
 
-    private void validateNull(String input) {
+    public void validateNull(String input) {
         if (input.isEmpty()) {
-            throw new NullPointerException("[ERROR] 아무값도 입력하지 않았습니다.");
+            throw new IllegalArgumentException("[ERROR] 아무값도 입력하지 않았습니다.");
         }
     }
 
@@ -46,14 +46,14 @@ public class InputView {
         }
     }
 
-    private void validateInputCorrectSeparator(String input) {
+    public void validateInputCorrectSeparator(String input) {
         String deleteSeparator = input.replaceAll("[0-9a-zA-zㄱ-ㅎ가-힣,]", "");
         if (!deleteSeparator.isEmpty()) {
             throw new IllegalArgumentException("[ERROR] 쉼표(,)로 구분하여 입력하세요.");
         }
     }
 
-    private void validateWinnerNumberNumeric(String input) {
+    public void validateWinnerNumberNumeric(String input) {
         for (String winnerLottoNumber : input.split(",")) {
             try {
                 Integer.parseInt(winnerLottoNumber);
