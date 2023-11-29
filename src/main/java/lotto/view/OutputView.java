@@ -1,6 +1,8 @@
 package lotto.view;
 
 import java.util.List;
+import java.util.Map;
+import lotto.constant.MessageConstant;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
 
@@ -22,6 +24,18 @@ public class OutputView {
     public void displayBonusLottoNumberPrompt() {
         System.out.println();
         System.out.println("보너스 번호를 입력해주세요.");
+    }
+
+    public void printWinningStatistics(Map<String, Integer> ranking) {
+        System.out.println();
+        System.out.println("당첨 통계");
+        System.out.println("---");
+        System.out.printf(MessageConstant.STATISTICS, ranking.get("FIFTH"), ranking.get("FORTH"), ranking.get("THIRD"),
+                ranking.get("SECOND"), ranking.get("FIRST"));
+    }
+
+    public void printTotalProfit(String profit) {
+        System.out.println("총 수익률은 " + profit + "%입니다.");
     }
 
     public void printPurchasedLottoNumbers(LottoNumbers lottoNumbers) {
