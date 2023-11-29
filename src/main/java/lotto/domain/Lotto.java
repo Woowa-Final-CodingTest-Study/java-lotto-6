@@ -20,7 +20,8 @@ public class Lotto {
     }
 
     public String getNumbersWithComma() {
-        return numbers.stream()
+        return List.copyOf(numbers).stream()
+                .sorted()
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "));
     }
