@@ -34,6 +34,10 @@ public class Money {
         return true;
     }
 
+    public int getMoney() {
+        return money;
+    }
+
     public int calculateTicketCount() {
         return (money / NumberConstants.MONEY_UNIT.getValue());
     }

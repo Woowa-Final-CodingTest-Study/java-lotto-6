@@ -9,6 +9,7 @@ import lotto.domain.Bonus;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.Rank;
 import lotto.domain.Service;
 import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
@@ -25,7 +26,7 @@ public class Controller {
         service.printUserLottos(lottos, ticketCount);
         WinningNumbers winningNumbers = enrollWinningNumbers();
         Bonus bonus = enrollBonus(winningNumbers);
-        // Map<Rank, Integer> rankCount = checkLottoGameResult(lottos, winningNumbers, bonus);
+        checkLottoGameResult(lottos, winningNumbers, bonus, money);
     }
 
     public Money enrollMoney() {
@@ -73,15 +74,11 @@ public class Controller {
         return bonus;
     }
 
-//    private Map<Rank, Integer> checkLottoGameResult(Lottos lottos, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-//        Map<Rank, Integer> rankCount = service.calculateRankCount(lottos, winningNumbers, bonusNumber);
-//        OutputView.printWinningStatistics();
-//        return rankCount;
-//    }
-//
-//    private void printWinningStatistics(Map<Rank, Integer> rankCount, Money money) {
-//        OutputView.printRankCount(rankCount);
-//        service.printRateOfReturn(rankCount, money);
-//    }
+    public void checkLottoGameResult(Lottos lottos, WinningNumbers winningNumbers, Bonus bonus, Money money) {
+        Map<Rank, Integer> rankCount = service.calculateRankCount(lottos, winningNumbers, bonus);
+        OutputView.printWinningStatistics(rankCount);
+        double rateOfReturn = service.calculateRateOfReturn(rankCount, money);
+        OutputView.printRateOfReturn(rateOfReturn);
+    }
 }
 

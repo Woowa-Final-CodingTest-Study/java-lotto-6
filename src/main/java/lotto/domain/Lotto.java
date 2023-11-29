@@ -17,6 +17,26 @@ public class Lotto {
         }
     }
 
+    public int countMatchingNumbers(WinningNumbers winningNumbers) {
+        int count = 0;
+        for (Integer number : this.numbers) {
+            if (winningNumbers.getWinningNumbers().contains(number)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public Rank match(WinningNumbers winningNumbers, Bonus bonus) {
+        int countOfMatch = countMatchingNumbers(winningNumbers);
+        boolean matchBonus = containsBonusNumber(bonus);
+        return Rank.calculateRank(countOfMatch, matchBonus);
+    }
+
+    public boolean containsBonusNumber(Bonus bonus) {
+        return this.numbers.contains(bonus.getBonus());
+    }
+
     @Override
     public String toString() {
         return numbers.toString();
