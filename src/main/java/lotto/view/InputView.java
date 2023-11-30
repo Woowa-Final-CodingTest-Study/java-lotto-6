@@ -1,75 +1,81 @@
 package lotto.view;
 
+import static lotto.utils.ErrorMessage.FORMAT_ERROR;
+import static lotto.utils.ErrorMessage.NOT_INTEGER_ERROR;
+
 import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.Bonus;
 import lotto.domain.Money;
 import lotto.domain.WinningNumbers;
-import lotto.utils.ErrorMessage;
 
 public class InputView {
     public static Money requestMoneyInput() {
-        int money = -1;
-        do {
-            String input = Console.readLine();
-            money = convertToInteger(input);
-            if (money == -1) {
-                throw new IllegalArgumentException(ErrorMessage.NOT_INTEGER_ERROR.getMessage());
-            }
-        } while (money == -1);
-        return new Money(money);
+        String input = Console.readLine();
+        validateMoneyInput(input);
+        return new Money(Integer.parseInt(input));
     }
 
     public static WinningNumbers requestWinningNumbers() {
-        List<Integer> winningNumbers = new ArrayList<>();
-        do {
-            String input = Console.readLine();
-            winningNumbers.addAll(convertToIntegerList(input));
-            if (winningNumbers.contains(-1)) {
-                throw new IllegalArgumentException(ErrorMessage.NOT_INTEGER_ERROR.getMessage());
-            }
-        } while (winningNumbers.contains(-1));
-        return new WinningNumbers(winningNumbers);
+        String input = Console.readLine();
+        validateWinningNumbersInput(input);
+        return new WinningNumbers(convertToIntegerList(input));
     }
 
     public static Bonus requestBonusInput(WinningNumbers winningNumbers) {
-        int bonus;
-        do {
-            String input = Console.readLine();
-            bonus = convertToInteger(input);
-            if (bonus == -1) {
-                throw new IllegalArgumentException(ErrorMessage.NOT_INTEGER_ERROR.getMessage());
-            }
-            validateDuplication(winningNumbers, bonus);
-        } while (bonus == -1);
-        return new Bonus(bonus);
+        String input = Console.readLine();
+        validateBonusInput(input);
+        int bonus = Integer.parseInt(input);
+        return new Bonus(winningNumbers, bonus);
     }
 
-    private static void validateDuplication(WinningNumbers winningNumbers, int bonus) {
-        if (winningNumbers.getWinningNumbers().contains(bonus)) {
-            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_BONUS_ERROR.getMessage());
+    public static void validateMoneyInput(String input) {
+        if (!isInteger(input)) {
+            throw new IllegalArgumentException(NOT_INTEGER_ERROR.getMessage());
+        }
+    }
+
+    private static void validateWinningNumbersInput(String input) {
+        if (!isValidFormatForWinningNumbers(input)) {
+            throw new IllegalArgumentException(FORMAT_ERROR.getMessage());
+        }
+    }
+
+    private static void validateBonusInput(String input) {
+        if (!isInteger(input)) {
+            throw new IllegalArgumentException(NOT_INTEGER_ERROR.getMessage());
         }
     }
 
     private static List<Integer> convertToIntegerList(String input) {
+        List<Integer> list = new ArrayList<>();
+        String[] numberStrings = input.split(",");
+        for (String numberString : numberStrings) {
+            list.add(Integer.parseInt(numberString));
+        }
+        return list;
+    }
+
+    private static boolean isInteger(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+    }
+
+    private static boolean isValidFormatForWinningNumbers(String input) {
         List<Integer> list = new ArrayList<>();
         try {
             String[] numberStrings = input.split(",");
             for (String numberString : numberStrings) {
                 list.add(Integer.parseInt(numberString));
             }
+            return true;
         } catch (NumberFormatException e) {
-            list.add(-1);
-        }
-        return list;
-    }
-
-    private static int convertToInteger(String input) {
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            return -1;
+            return false;
         }
     }
 }

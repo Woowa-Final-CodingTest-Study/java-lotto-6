@@ -6,7 +6,8 @@ public enum GameMessage {
     REQUEST_WINNING_NUMBERS_INPUT("당첨 번호를 입력해 주세요."),
     EARNING_RATE("총 수익률은 %.2f%%입니다.\n"),
     PRIZE_MONEY("%,d"),
-    WINNING_STATISTICS("%d개 일치 (%s원) - %d개\n");
+    WINNING_STATISTICS("%d개 일치 (%s원) - %d개\n"),
+    LINES("---");
 
     private final String message;
 

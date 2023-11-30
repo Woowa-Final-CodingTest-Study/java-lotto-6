@@ -1,6 +1,7 @@
 package lotto.view;
 
 import static lotto.utils.GameMessage.EARNING_RATE;
+import static lotto.utils.GameMessage.LINES;
 import static lotto.utils.GameMessage.PRIZE_MONEY;
 import static lotto.utils.GameMessage.WINNING_STATISTICS;
 
@@ -26,7 +27,7 @@ public class OutputView {
 
     public static void printWinningStatistics(Map<Rank, Integer> rankCount) {
         printMessage("당첨 통계");
-        printMessage("---------");
+        printMessage(LINES.getMessage());
         for (Rank rank : Rank.values()) {
             if (rank.getCountOfMatch() > 0) {
                 System.out.printf(WINNING_STATISTICS.getMessage(), rank.getCountOfMatch(), formatPrizeMoney(rank.getPrizeMoney()),

@@ -18,7 +18,7 @@ public class WinningNumbers {
     }
 
     public List<Integer> getWinningNumbers() {
-        return winningNumbers;
+        return List.copyOf(winningNumbers);
     }
 
     private void validateNumbers(List<Integer> winningNumbers) {
