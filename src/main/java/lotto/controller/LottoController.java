@@ -22,6 +22,9 @@ public class LottoController {
     }
 
     public void start() {
-        
+        outputView.notifyInputAmount();
+        int amount = inputView.readAmount();
+
+
     }
 }
