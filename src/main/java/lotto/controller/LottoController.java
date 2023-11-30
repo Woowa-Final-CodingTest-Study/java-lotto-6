@@ -30,6 +30,6 @@ public class LottoController {
         LottoBundle lottoBundle = lottoProvider.generateLottoBundle();
         outputView.printGeneratedLottoResults(lottoBundle);
 
-
+        
     }
 }

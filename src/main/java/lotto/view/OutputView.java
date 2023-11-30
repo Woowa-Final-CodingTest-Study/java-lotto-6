@@ -25,7 +25,7 @@ public class OutputView {
     }
 
     public void printGeneratedLottoResults(LottoBundle lottoBundle) {
-        println(lottoBundle.count() + "개를 구매했습니다.");
+        println(lottoBundle.count() + OutputMessage.PRINT_LOTTO_COUNT_SUFFIX);
         lottoBundle.toStringList().forEach(this::println);
     }
 }
