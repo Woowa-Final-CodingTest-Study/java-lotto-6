@@ -1,8 +1,6 @@
 package lotto.controller;
 
-import lotto.model.Lotto;
-import lotto.model.LottoBundle;
-import lotto.model.LottoVendor;
+import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -27,8 +25,7 @@ public class LottoController {
         outputView.notifyInputAmount();
         int amount = inputView.readAmount();
 
-        LottoVendor lottoVendor = new LottoVendor(amount);
-        LottoBundle lottoBundle = lottoVendor.generateLottoBundle();
+        LottoBundle lottoBundle = LottoVendor.generateLottoBundle(amount);
         outputView.printGeneratedLottoResults(lottoBundle);
 
         outputView.notifyInputLottoNumbers();
@@ -37,6 +34,9 @@ public class LottoController {
         outputView.notifyInputBonusNumber();
         int bonusNumber = inputView.readBonusNumber(winningLotto);
 
+        WinningManager winningManager = new WinningManager(winningLotto, bonusNumber);
+        WinningResult result = winningManager.getResult(amount, lottoBundle);
 
+        outputView.printResult(result);
     }
 }

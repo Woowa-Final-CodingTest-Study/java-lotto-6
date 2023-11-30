@@ -1,5 +1,8 @@
 package lotto.model;
 
+import org.assertj.core.util.Lists;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,5 +50,11 @@ public class Lotto {
 
     public boolean contains(int bonusNumber) {
         return numbers.contains(bonusNumber);
+    }
+
+    public LottoRank rank(Lotto winningLotto, int bonusNumber) {
+        List<Integer> newNumbers = new ArrayList<>(numbers);
+        newNumbers.retainAll(winningLotto.numbers);
+        return LottoRank.of(newNumbers.size(), numbers.contains(bonusNumber));
     }
 }

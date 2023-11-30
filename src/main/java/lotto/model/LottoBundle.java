@@ -19,4 +19,10 @@ public class LottoBundle {
     public int count() {
         return lottoBundle.size();
     }
+
+    public List<LottoRank> ranks(Lotto winningLotto, int bonusNumber) {
+        return lottoBundle.stream()
+                .map(lotto -> lotto.rank(winningLotto, bonusNumber))
+                .toList();
+    }
 }

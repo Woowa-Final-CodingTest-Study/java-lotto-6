@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.constant.OutputMessage;
 import lotto.model.LottoBundle;
+import lotto.model.WinningResult;
 
 public class OutputView {
     private static OutputView outputView;
@@ -35,5 +36,12 @@ public class OutputView {
 
     public void notifyInputBonusNumber() {
         println(OutputMessage.NOTIFY_INPUT_BONUS_NUMBER);
+    }
+
+    public void printResult(WinningResult result) {
+        println(OutputMessage.PRINT_RESULT);
+        println("---");
+        result.toResultStrings().forEach(this::println);
+        println("총 수익률은 " + result.toEarningRatioString() + "%입니다.");
     }
 }
