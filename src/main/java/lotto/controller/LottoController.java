@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.model.Lotto;
 import lotto.model.LottoBundle;
 import lotto.model.LottoProvider;
 import lotto.view.InputView;
@@ -30,6 +31,10 @@ public class LottoController {
         LottoBundle lottoBundle = lottoProvider.generateLottoBundle();
         outputView.printGeneratedLottoResults(lottoBundle);
 
-        
+        outputView.notifyInputLottoNumbers();
+        Lotto winningLotto = inputView.readLottoNumbers();
+
+        outputView.notifyInputBonusNumber();
+        int bonusNumber = inputView.readBonusNumber(winningLotto);
     }
 }

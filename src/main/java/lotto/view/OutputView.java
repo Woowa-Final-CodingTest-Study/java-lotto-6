@@ -28,4 +28,12 @@ public class OutputView {
         println(lottoBundle.count() + OutputMessage.PRINT_LOTTO_COUNT_SUFFIX);
         lottoBundle.toStringList().forEach(this::println);
     }
+
+    public void notifyInputLottoNumbers() {
+        println(OutputMessage.NOTIFY_INPUT_LOTTO_NUMBERS);
+    }
+
+    public void notifyInputBonusNumber() {
+        println(OutputMessage.NOTIFY_INPUT_BONUS_NUMBER);
+    }
 }
