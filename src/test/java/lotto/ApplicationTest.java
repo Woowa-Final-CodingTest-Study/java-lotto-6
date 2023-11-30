@@ -1,13 +1,12 @@
 package lotto;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import camp.nextstep.edu.missionutils.test.NsTest;
+import java.util.List;
+import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
@@ -47,9 +46,131 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트() {
+    void 일치여부_모두_해당할때_테스트() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    run("6000", "1,2,3,4,5,6", "7");
+                    assertThat(output()).contains(
+                            "6개를 구매했습니다.",
+                            "[1, 2, 3, 4, 5, 6]",
+                            "[1, 2, 3, 4, 5, 7]",
+                            "[1, 2, 3, 4, 5, 8]",
+                            "[1, 2, 3, 4, 8, 9]",
+                            "[1, 2, 3, 7, 8, 9]",
+                            "[1, 2, 9, 10, 11, 13]",
+                            "3개 일치 (5,000원) - 1개",
+                            "4개 일치 (50,000원) - 1개",
+                            "5개 일치 (1,500,000원) - 1개",
+                            "5개 일치, 보너스 볼 일치 (30,000,000원) - 1개",
+                            "6개 일치 (2,000,000,000원) - 1개",
+                            "총 수익률은 33859250.0%입니다."
+                    );
+                },
+                List.of(6, 5, 4, 3, 2, 1),
+                List.of(1, 2, 3, 4, 5, 7),
+                List.of(1, 2, 3, 4, 5, 8),
+                List.of(1, 2, 3, 4, 8, 9),
+                List.of(1, 2, 3, 7, 8, 9),
+                List.of(1, 2, 9, 10, 11, 13)
+        );
+    }
+
+    @Test
+    void 예외_구입금액에_문자_있을때_테스트() {
         assertSimpleTest(() -> {
             runException("1000j");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @Test
+    void 예외_구입금액이_너무_클때() {
+        assertSimpleTest(() -> {
+            runException("100000000");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @Test
+    void 예외_구입금액이_나누어_떨어지지_않을때_테스트() {
+        assertSimpleTest(() -> {
+            runException("5500");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @Test
+    void 예외_당첨번호_포멧이_잘못_되었을때_테스트() {
+        assertSimpleTest(() -> {
+            runException("1000", "3,23!3,6,7,8,9");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @Test
+    void 예외_당첨번호_갯수가_6개가_아닐때() {
+        assertSimpleTest(() -> {
+            runException("1000", "1,2,3,4,5,6,7");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+
+        assertSimpleTest(() -> {
+            runException("1000", "1,2,3,4,5");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @Test
+    void 예외_당첨번호_숫자가_범위를_벗어날때() {
+        assertSimpleTest(() -> {
+            runException("1000", "1,2,46,4,5,6");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+
+        assertSimpleTest(() -> {
+            runException("1000", "1,2,0,4,5,6");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @Test
+    void 예외_당첨번호에_중복된_숫자가_있을때() {
+        assertSimpleTest(() -> {
+            runException("1000", "1,2,2,3,4,6");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @Test
+    void 예외_보너스번호가_정수가_아닐때() {
+        assertSimpleTest(() -> {
+            runException("1000", "1,2,7,3,4,6", "*");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @Test
+    void 예외_보너스번호가_범위를_벗어날때() {
+        assertSimpleTest(() -> {
+            runException("1000", "1,2,7,3,4,6", "0");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+
+        assertSimpleTest(() -> {
+            runException("1000", "1,2,7,3,4,6", "46");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @Test
+    void 예외_보너스번호가_당첨번호와_중복될때() {
+        assertSimpleTest(() -> {
+            runException("1000", "1,2,7,3,4,6", "3");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+
+        assertSimpleTest(() -> {
+            runException("1000", "1,2,7,3,4,6", "2");
             assertThat(output()).contains(ERROR_MESSAGE);
         });
     }
