@@ -11,35 +11,58 @@
 
 ### 구입 금액 입력
 - 구입 금액을 천 원 단위로 입력받는다.
-- 구입 금액에 대한 예외는 다음과 같이 처리한다.
-  - 숫자가 아닌 경우: `IllegalArgumentException`
-  - 양수가 아닌 경우: `IllegalArgumentException`
-  - 천 원 단위가 아닌 경우: `IllegalArgumentException`
+- 구입 금액에 대한 예외는 다음과 같이 처리하고, 다시 입력받는다.
+  - 숫자가 아닌 경우:
+    - `IllegalArgumentException`
+    - `[ERROR] 숫자를 입력해야 합니다.`
+  - 양수가 아닌 경우:
+    - `IllegalArgumentException`
+    - `[ERROR] 구임 금액은 0보다 커야 합니다.`
+  - 천 원 단위가 아닌 경우:
+    - `IllegalArgumentException`
+    - `[ERROR] 1,000원 단위로 입력해야 합니다.`
 
 ### 로또 번호 생성
 - 로또 번호는 1-45 사이에서 중복 숫자가 없이 6개를 생성한다.
 - 로또 번호에 대한 예외는 다음과 같이 처리한다.
-  - 6개가 아닌 경우: `IllegalArgumentException`
-  - 범위 밖의 숫자가 있는 경우: `IllegalArgumentException`
-  - 중복된 숫자가 있는 경우: `IllegalArgumentException`
+  - 6개가 아닌 경우: 
+    - `IllegalArgumentException`
+  - 범위 밖의 숫자가 있는 경우:
+    - `IllegalArgumentException`
+  - 중복된 숫자가 있는 경우:
+    - `IllegalArgumentException`
 
 ### 로또 번호 입력
 - 로또 번호는 1-45 사이에서 중복 숫자가 없이 6개를 입력받는다.
-- 로또 번호에 대한 예외는 다음과 같이 처리한다.
-  - 6개가 아닌 경우: `IllegalArgumentException`
-  - 숫자가 아닌 경우: `IllegalArgumentException`
-  - 범위 밖의 숫자가 있는 경우: `IllegalArgumentException`
-  - 중복된 숫자가 있는 경우: `IllegalArgumentException`
+- 로또 번호는 (,)로 구분한다.
+- 로또 번호에 대한 예외는 다음과 같이 처리하고, 다시 입력받는다.
+  - 6개가 아닌 경우:
+    - `IllegalArgumentException`
+    - `[ERROR] 6개를 입력해야 합니다.`
+  - 숫자가 아닌 경우:
+    - `IllegalArgumentException`
+    - `[ERROR] 숫자만 입력해야 합니다.`
+  - 범위 밖의 숫자가 있는 경우:
+    - `IllegalArgumentException`
+    - `[ERROR] 각 번호는 1-45 범위에 있어야 합니다.`
+  - 중복된 숫자가 있는 경우:
+    - `IllegalArgumentException`
+    - `[ERROR] 모든 번호는 중복되지 않아야 합니다.`
 
 ### 보너스 번호 입력
 - 보너스 번호는 1-45 사이에서 중복 숫자가 없이 입력받는다.
-- 보너스 번호에 대한 예외는 다음과 같이 처리한다.
-  - 숫자가 아닌 경우: `IllegalArgumentException`
-  - 범위 밖의 숫자가 있는 경우: `IllegalArgumentException`
-  - 로또 번호와 중복된 숫자가 있는 경우: `IllegalArgumentException`
+- 보너스 번호에 대한 예외는 다음과 같이 처리하고, 다시 입력받는다.
+  - 숫자가 아닌 경우:
+    - `IllegalArgumentException`
+    - `[ERROR] 숫자만 입력해야 합니다.`
+  - 범위 밖의 숫자가 있는 경우:
+    - `IllegalArgumentException`
+    - `[ERROR] 번호는 1-45 범위에 있어야 합니다.`
+  - 로또 번호와 중복된 숫자가 있는 경우:
+    - `IllegalArgumentException`
+    - `[ERROR] 로또 번호와 중복되지 않아야 합니다.`
 
 ### 당첨 통계 및 수익률 출력
 - 당첨 통계는 5등부터 역순으로 출력한다.
 - 수익률은 [수익 금액]/[구입 금액]으로 계산한다.
 - 수익률은 소숫점 아래 1자리까지, %단위로 출력한다.
-
