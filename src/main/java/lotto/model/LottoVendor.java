@@ -3,11 +3,11 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoProvider {
+public class LottoVendor {
     private static final RandomGenerator randomLottoGenerator = new RandomGenerator(Lotto.RANGE_MIN, Lotto.RANGE_MAX, Lotto.LENGTH);
     private final int amount;
 
-    public LottoProvider(int amount) {
+    public LottoVendor(int amount) {
 
         this.amount = amount;
     }

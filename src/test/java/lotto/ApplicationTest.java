@@ -1,10 +1,11 @@
 package lotto;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import lotto.constant.ErrorMessage;
+import lotto.provider.AmountProvider;
+import lotto.provider.LottoProvider;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 
 import java.util.List;
 
@@ -50,29 +51,20 @@ class ApplicationTest extends NsTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1000j", "1000 ", "10-10"})
-    void 구매_금액이_숫자가_아닌_경우(String input) {
+    @ArgumentsSource(value = AmountProvider.class)
+    void 구매_금액_입력_예외_테스트(String errorMessage, String amount) {
         assertSimpleTest(() -> {
-            runException(input);
-            assertThat(output()).contains(ErrorMessage.INPUT_MUST_NUMBER);
+            runException(amount);
+            assertThat(output()).contains(errorMessage);
         });
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"-1000", "-1", "0"})
-    void 구매_금액이_양수가_아닌_경우(String input) {
+    @ArgumentsSource(value = LottoProvider.class)
+    void 로또_번호_입력_예외_테스트(String errorMessage, String[] args) {
         assertSimpleTest(() -> {
-            runException(input);
-            assertThat(output()).contains(ErrorMessage.AMOUNT_MUST_POSITIVE);
-        });
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"1001", "1", "10100"})
-    void 구매_금액이_로또_가격으로_나누어_떨어지지_않는_경우(String input) {
-        assertSimpleTest(() -> {
-            runException(input);
-            assertThat(output()).contains(ErrorMessage.AMOUNT_MUST_DIVISIBLE);
+            runException(args);
+            assertThat(output()).contains(errorMessage);
         });
     }
 

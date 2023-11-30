@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.model.Lotto;
 import lotto.model.LottoBundle;
-import lotto.model.LottoProvider;
+import lotto.model.LottoVendor;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -27,8 +27,8 @@ public class LottoController {
         outputView.notifyInputAmount();
         int amount = inputView.readAmount();
 
-        LottoProvider lottoProvider = new LottoProvider(amount);
-        LottoBundle lottoBundle = lottoProvider.generateLottoBundle();
+        LottoVendor lottoVendor = new LottoVendor(amount);
+        LottoBundle lottoBundle = lottoVendor.generateLottoBundle();
         outputView.printGeneratedLottoResults(lottoBundle);
 
         outputView.notifyInputLottoNumbers();
@@ -36,5 +36,7 @@ public class LottoController {
 
         outputView.notifyInputBonusNumber();
         int bonusNumber = inputView.readBonusNumber(winningLotto);
+
+
     }
 }
