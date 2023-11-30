@@ -1,0 +1,47 @@
+package lotto.view;
+
+import lotto.constant.OutputMessage;
+import lotto.model.LottoBundle;
+import lotto.model.WinningResult;
+
+public class OutputView {
+    private static OutputView outputView;
+
+    private OutputView() {
+    }
+
+    public static OutputView getInstance() {
+        if (outputView == null) {
+            outputView = new OutputView();
+        }
+        return outputView;
+    }
+
+    public void println(String message) {
+        System.out.println(message);
+    }
+
+    public void notifyInputAmount() {
+        println(OutputMessage.NOTIFY_INPUT_AMOUNT);
+    }
+
+    public void printGeneratedLottoResults(LottoBundle lottoBundle) {
+        println(lottoBundle.count() + OutputMessage.PRINT_LOTTO_COUNT_SUFFIX);
+        lottoBundle.toStringList().forEach(this::println);
+    }
+
+    public void notifyInputLottoNumbers() {
+        println(OutputMessage.NOTIFY_INPUT_LOTTO_NUMBERS);
+    }
+
+    public void notifyInputBonusNumber() {
+        println(OutputMessage.NOTIFY_INPUT_BONUS_NUMBER);
+    }
+
+    public void printResult(WinningResult result) {
+        println(OutputMessage.PRINT_RESULT);
+        println("---");
+        result.toResultStrings().forEach(this::println);
+        println("총 수익률은 " + result.toEarningRatioString() + "%입니다.");
+    }
+}

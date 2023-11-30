@@ -1,7 +1,11 @@
 package lotto;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import lotto.provider.AmountProvider;
+import lotto.provider.LottoProvider;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 
 import java.util.List;
 
@@ -46,11 +50,21 @@ class ApplicationTest extends NsTest {
         );
     }
 
-    @Test
-    void 예외_테스트() {
+    @ParameterizedTest
+    @ArgumentsSource(value = AmountProvider.class)
+    void 구매_금액_입력_예외_테스트(String errorMessage, String amount) {
         assertSimpleTest(() -> {
-            runException("1000j");
-            assertThat(output()).contains(ERROR_MESSAGE);
+            runException(amount);
+            assertThat(output()).contains(errorMessage);
+        });
+    }
+
+    @ParameterizedTest
+    @ArgumentsSource(value = LottoProvider.class)
+    void 로또_번호_입력_예외_테스트(String errorMessage, String[] args) {
+        assertSimpleTest(() -> {
+            runException(args);
+            assertThat(output()).contains(errorMessage);
         });
     }
 
