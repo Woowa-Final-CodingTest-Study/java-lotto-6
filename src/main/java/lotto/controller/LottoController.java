@@ -1,11 +1,12 @@
 package lotto.controller;
 
+import lotto.model.LottoBundle;
+import lotto.model.LottoProvider;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
     private static LottoController lottoController;
-
     private final InputView inputView;
     private final OutputView outputView;
 
@@ -24,6 +25,10 @@ public class LottoController {
     public void start() {
         outputView.notifyInputAmount();
         int amount = inputView.readAmount();
+
+        LottoProvider lottoProvider = new LottoProvider(amount);
+        LottoBundle lottoBundle = lottoProvider.generateLottoBundle();
+        outputView.printGeneratedLottoResults(lottoBundle);
 
 
     }

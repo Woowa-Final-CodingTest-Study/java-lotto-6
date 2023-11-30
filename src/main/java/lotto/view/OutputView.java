@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.constant.OutputMessage;
+import lotto.model.LottoBundle;
 
 public class OutputView {
     private static OutputView outputView;
@@ -21,5 +22,10 @@ public class OutputView {
 
     public void notifyInputAmount() {
         println(OutputMessage.NOTIFY_INPUT_AMOUNT);
+    }
+
+    public void printGeneratedLottoResults(LottoBundle lottoBundle) {
+        println(lottoBundle.count() + "개를 구매했습니다.");
+        lottoBundle.toStringList().forEach(this::println);
     }
 }

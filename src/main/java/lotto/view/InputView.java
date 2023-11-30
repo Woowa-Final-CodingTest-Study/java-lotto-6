@@ -1,7 +1,7 @@
 package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import lotto.Lotto;
+import lotto.model.Lotto;
 import lotto.constant.ErrorMessage;
 
 public class InputView {
@@ -23,6 +23,7 @@ public class InputView {
                 String input = Console.readLine();
                 int amount = parseAmount(input);
                 validateAmount(amount);
+                return amount;
             } catch (IllegalArgumentException e) {
                 printErrorMessage(e);
             }
