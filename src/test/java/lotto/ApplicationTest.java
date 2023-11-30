@@ -1,7 +1,10 @@
 package lotto;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import lotto.constant.ErrorMessage;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -46,11 +49,30 @@ class ApplicationTest extends NsTest {
         );
     }
 
-    @Test
-    void 예외_테스트() {
+    @ParameterizedTest
+    @ValueSource(strings = {"1000j", "1000 ", "10-10"})
+    void 구매_금액이_숫자가_아닌_경우(String input) {
         assertSimpleTest(() -> {
-            runException("1000j");
-            assertThat(output()).contains(ERROR_MESSAGE);
+            runException(input);
+            assertThat(output()).contains(ErrorMessage.INPUT_MUST_NUMBER);
+        });
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"-1000", "-1", "0"})
+    void 구매_금액이_양수가_아닌_경우(String input) {
+        assertSimpleTest(() -> {
+            runException(input);
+            assertThat(output()).contains(ErrorMessage.AMOUNT_MUST_POSITIVE);
+        });
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1001", "1", "10100"})
+    void 구매_금액이_로또_가격으로_나누어_떨어지지_않는_경우(String input) {
+        assertSimpleTest(() -> {
+            runException(input);
+            assertThat(output()).contains(ErrorMessage.AMOUNT_MUST_DIVISIBLE);
         });
     }
 
