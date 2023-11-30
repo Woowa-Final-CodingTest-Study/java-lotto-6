@@ -3,22 +3,40 @@ package lotto;
 import lotto.model.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.in;
+import static org.junit.jupiter.params.provider.Arguments.*;
 
 class LottoTest {
-    @DisplayName("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.")
+    public static Stream<Arguments> outOfRangeNumbersProvider() {
+        return Stream.of(
+                arguments(List.of(0, 2, 3, 4, 5, 6)),
+                arguments(List.of(0, 2, 3, 4, 5, 46))
+        );
+    }
+
     @Test
-    void createLottoByOverSize() {
+    void 로또_번호의_개수가_6개가_넘어갈_경우() {
         assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 6, 7)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("로또 번호에 중복된 숫자가 있으면 예외가 발생한다.")
+    @ParameterizedTest
+    @MethodSource("outOfRangeNumbersProvider")
+    void 로또_번호가_1_45의_범위를_벗어날_경우(List<Integer> input) {
+        assertThatThrownBy(() -> new Lotto(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @Test
-    void createLottoByDuplicatedNumber() {
+    void 로또_번호에_중복된_숫자가_있는_경우() {
         // TODO: 이 테스트가 통과할 수 있게 구현 코드 작성
         assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 5)))
                 .isInstanceOf(IllegalArgumentException.class);
