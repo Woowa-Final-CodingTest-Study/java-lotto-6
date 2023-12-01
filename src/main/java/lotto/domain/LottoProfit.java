@@ -3,6 +3,7 @@ package lotto.domain;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Map;
+import lotto.constant.NumberConstant;
 import lotto.constant.Rank;
 
 public class LottoProfit {
@@ -15,7 +16,7 @@ public class LottoProfit {
                 .mapToLong(rank -> (long)rank.getPrize() * ranking.get(rank.name()))
                 .sum();
 
-        return calculateProfit(totalPrize, lottoAmount*1000);
+        return calculateProfit(totalPrize, lottoAmount* NumberConstant.LOTTO_PRICE);
     }
 
     public String calculateProfit(long totalPrize, int purchaseAmount) {

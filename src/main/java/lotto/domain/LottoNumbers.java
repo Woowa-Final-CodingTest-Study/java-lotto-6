@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumbers {
@@ -13,10 +12,6 @@ public class LottoNumbers {
 
     public int getSize() {
         return lottoNumbers.size();
-    }
-
-    public List<Lotto> getLotto() {
-        return new ArrayList<>(lottoNumbers);
     }
 
     public Lotto getEachLotto(int index) {

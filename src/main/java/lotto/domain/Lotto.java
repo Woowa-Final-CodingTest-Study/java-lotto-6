@@ -6,11 +6,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import lotto.constant.ErrorMessageConstant;
+import lotto.constant.NumberConstant;
 
 public class Lotto {
 
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -21,7 +20,7 @@ public class Lotto {
     }
 
     private void validateSize(List<Integer> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != NumberConstant.LOTTO_SIZE) {
             throw new IllegalArgumentException(ErrorMessageConstant.PREFIX + ErrorMessageConstant.WINNING_NUMBERS_SIZE);
         }
     }
@@ -33,7 +32,7 @@ public class Lotto {
             if(!deleteDuplicateNumbers.add(number)) {
                 throw new IllegalArgumentException(ErrorMessageConstant.PREFIX + ErrorMessageConstant.DUPLICATED_NUMBER);
             }
-            if(number < MIN_NUMBER || number > MAX_NUMBER) {
+            if(number < NumberConstant.MIN_NUMBER || number > NumberConstant.MAX_NUMBER) {
                 throw new IllegalArgumentException(ErrorMessageConstant.PREFIX + ErrorMessageConstant.INPUT_NUMBERS_IN_RANGE);
             }
         }

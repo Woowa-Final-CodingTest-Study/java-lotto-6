@@ -3,6 +3,7 @@ package lotto.domain;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
+import lotto.constant.NumberConstant;
 
 public class LottoBuy {
 
@@ -18,14 +19,14 @@ public class LottoBuy {
     }
 
     public Lotto generateLottoNumber() {
-        List<Integer> lottoNumbers = new ArrayList<>(Randoms.pickUniqueNumbersInRange(1, 45, 6));
+        List<Integer> lottoNumbers = new ArrayList<>(Randoms.pickUniqueNumbersInRange(NumberConstant.MIN_NUMBER, NumberConstant.MAX_NUMBER, NumberConstant.LOTTO_SIZE));
         Lotto lotto = new Lotto(lottoNumbers);
 
         return lotto;
     }
 
     public int calculateLottoAmount(int purchaseAmount) {
-        return purchaseAmount / 1000;
+        return purchaseAmount / NumberConstant.LOTTO_PRICE;
     }
 
 }
