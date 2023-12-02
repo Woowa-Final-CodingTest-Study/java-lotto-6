@@ -1,6 +1,7 @@
 package lotto.constant;
 
 public enum Rank {
+    NOTHING(0, false, 0),
     FIFTH(3, false, 5_000),
     FORTH(4, false, 50_000),
     THIRD(5, false, 1_500_000),
@@ -36,7 +37,7 @@ public enum Rank {
                 return rank.name();
             }
         }
-        return "없음";
+        return NOTHING.name();
     }
 
 }

@@ -14,9 +14,10 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validateSize(numbers);
-        validateDuplicateAndRange(numbers);
+        validateDuplicate(numbers);
+        validateRange(numbers);
         Collections.sort(numbers);
-        this.numbers = numbers;
+        this.numbers = Collections.unmodifiableList(numbers);
     }
 
     private void validateSize(List<Integer> numbers) {
@@ -25,13 +26,18 @@ public class Lotto {
         }
     }
 
-    private void validateDuplicateAndRange(List<Integer> numbers) {
+    private void validateDuplicate(List<Integer> numbers) {
         Set<Integer> deleteDuplicateNumbers = new HashSet<>();
 
         for(int number : numbers) {
             if(!deleteDuplicateNumbers.add(number)) {
                 throw new IllegalArgumentException(ErrorMessageConstant.PREFIX + ErrorMessageConstant.DUPLICATED_NUMBER);
             }
+        }
+    }
+
+    private void validateRange(List<Integer> numbers) {
+        for(int number : numbers) {
             if(number < NumberConstant.MIN_NUMBER || number > NumberConstant.MAX_NUMBER) {
                 throw new IllegalArgumentException(ErrorMessageConstant.PREFIX + ErrorMessageConstant.INPUT_NUMBERS_IN_RANGE);
             }
@@ -39,7 +45,7 @@ public class Lotto {
     }
 
     public List<Integer> getEachLottoNumbers() {
-        return Collections.unmodifiableList(new ArrayList<>(numbers));
+        return new ArrayList<>(numbers);
     }
 
 }

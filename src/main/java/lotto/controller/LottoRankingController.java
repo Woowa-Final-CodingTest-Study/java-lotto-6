@@ -6,12 +6,14 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoProfit;
 import lotto.domain.LottoRank;
+import lotto.domain.LottoResult;
 import lotto.domain.WinningLottoNumbers;
 import lotto.view.OutputView;
 
 public class LottoRankingController {
 
     LottoProfit lottoProfit = new LottoProfit();
+    LottoResult lottoResult = new LottoResult();
     LottoRank lottoRank = new LottoRank();
     OutputView outputView = new OutputView();
 
@@ -24,27 +26,23 @@ public class LottoRankingController {
     }
 
     public Map<String, Integer> compareLottoNumbers(LottoNumbers lottoNumbers, WinningLottoNumbers winningLottoNumbers) {
-        Map<String, Integer> ranking = lottoRank.initializeRank();
+        LottoResult winningResult = new LottoResult();
 
         for(int i=0; i<lottoNumbers.getSize(); i++){
             Lotto lotto = lottoNumbers.getEachLotto(i);
             List<Integer> numbers = lotto.getEachLottoNumbers();
 
-            updateRanking(ranking, numbers, winningLottoNumbers);
+            updateRanking(numbers, winningLottoNumbers);
         }
-        return ranking;
+        return winningResult.getLottoResult();
     }
 
-    public void updateRanking(Map<String, Integer> ranking, List<Integer> numbers, WinningLottoNumbers winningLottoNumbers) {
+    public void updateRanking(List<Integer> numbers, WinningLottoNumbers winningLottoNumbers) {
 
         int matchingCount = winningLottoNumbers.matchCount(numbers);
         boolean existBonus = winningLottoNumbers.containBonusNumber(numbers);
 
-        String rank = lottoRank.rankLotto(matchingCount, existBonus);
-
-        if(!rank.equals("없음")) {
-            ranking.put(rank, ranking.getOrDefault(rank, 0)+1);
-        }
+        lottoResult.updateResult(matchingCount, existBonus);
     }
 
 }
