@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lotto.constant.Rank;
 
@@ -19,10 +20,18 @@ public class LottoResult {
         }
     }
 
-    public void updateResult(int matchingCount, boolean existBonus) {
+    public void updateResult(List<Integer> numbers, WinningLottoNumbers winningLottoNumbers) {
+
+        int matchingCount = winningLottoNumbers.matchCount(numbers);
+        boolean existBonus = winningLottoNumbers.containBonusNumber(numbers);
+
         String rank = Rank.assignRank(matchingCount, existBonus);
 
-        if(rank.equals(Rank.NOTHING.name())) {
+        updateLottoResult(rank);
+    }
+
+    public void updateLottoResult(String rank) {
+        if(!rank.equals(Rank.NOTHING.name())) {
             lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + 1);
         }
     }

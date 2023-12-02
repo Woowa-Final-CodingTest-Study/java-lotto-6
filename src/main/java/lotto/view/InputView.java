@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.constant.ErrorMessageConstant;
+import lotto.constant.NumberConstant;
 
 public class InputView {
 
@@ -13,15 +14,24 @@ public class InputView {
     public int inputValue() {
         String input = Console.readLine();
         validateInputValue(input);
+
         return Integer.parseInt(input);
     }
 
     public List<Integer> inputWinnerLottoNumbers() {
         String input = Console.readLine();
         validateInputWinnerLottoNumbers(input);
+
         return Arrays.stream(input.split(","))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    public int inputBonusNumber() {
+        String input = Console.readLine();
+        validateInputBonusNumber(input);
+
+        return Integer.parseInt(input);
     }
 
     private void validateInputValue(String input) {
@@ -33,6 +43,12 @@ public class InputView {
         validateNull(input);
         validateInputCorrectSeparator(input);
         validateWinnerNumberNumeric(input);
+    }
+
+    private void validateInputBonusNumber(String input) {
+        validateNull(input);
+        validateNumeric(input);
+        validateBonusNumberRange(input);
     }
 
     public void validateNull(String input) {
@@ -53,6 +69,14 @@ public class InputView {
         String deleteSeparator = input.replaceAll(REPLACEALL_REGEX, "");
         if (!deleteSeparator.isEmpty()) {
             throw new IllegalArgumentException(ErrorMessageConstant.PREFIX + ErrorMessageConstant.CHECK_SEPARATOR);
+        }
+    }
+
+    public void validateBonusNumberRange(String input) {
+        int bonusNumber = Integer.parseInt(input);
+
+        if (bonusNumber < NumberConstant.MIN_NUMBER || bonusNumber > NumberConstant.MAX_NUMBER) {
+            throw new IllegalArgumentException(ErrorMessageConstant.PREFIX + ErrorMessageConstant.INPUT_NUMBERS_IN_RANGE);
         }
     }
 

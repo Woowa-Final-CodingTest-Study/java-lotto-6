@@ -5,7 +5,6 @@ import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoProfit;
-import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
 import lotto.domain.WinningLottoNumbers;
 import lotto.view.OutputView;
@@ -13,8 +12,6 @@ import lotto.view.OutputView;
 public class LottoRankingController {
 
     LottoProfit lottoProfit = new LottoProfit();
-    LottoResult lottoResult = new LottoResult();
-    LottoRank lottoRank = new LottoRank();
     OutputView outputView = new OutputView();
 
     public void printWinningStatistics(LottoNumbers lottoNumbers, WinningLottoNumbers winningLottoNumbers) {
@@ -32,17 +29,9 @@ public class LottoRankingController {
             Lotto lotto = lottoNumbers.getEachLotto(i);
             List<Integer> numbers = lotto.getEachLottoNumbers();
 
-            updateRanking(numbers, winningLottoNumbers);
+            winningResult.updateResult(numbers, winningLottoNumbers);
         }
         return winningResult.getLottoResult();
-    }
-
-    public void updateRanking(List<Integer> numbers, WinningLottoNumbers winningLottoNumbers) {
-
-        int matchingCount = winningLottoNumbers.matchCount(numbers);
-        boolean existBonus = winningLottoNumbers.containBonusNumber(numbers);
-
-        lottoResult.updateResult(matchingCount, existBonus);
     }
 
 }

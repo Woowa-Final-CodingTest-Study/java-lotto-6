@@ -32,8 +32,12 @@ public enum Rank {
 
     public static String assignRank(int matchingCount, boolean bonus) {
         for(Rank rank : Rank.values()) {
-            if(rank.getMatchingCount() == matchingCount &&
+            if(matchingCount == 5 && rank.getMatchingCount() == matchingCount &&
                     rank.isBonus() == bonus) {
+                return rank.name();
+            }
+
+            if(rank.getMatchingCount() == matchingCount) {
                 return rank.name();
             }
         }

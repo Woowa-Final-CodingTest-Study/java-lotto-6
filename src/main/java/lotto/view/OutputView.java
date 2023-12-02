@@ -23,13 +23,22 @@ public class OutputView {
     }
 
     public void displayBonusLottoNumberPrompt() {
-        System.out.println();
         System.out.println(MessageConstant.INPUT_BONUS_NUMBER);
     }
 
     public void printWinningStatistics(Map<String, Integer> ranking) {
-        System.out.printf(MessageConstant.STATISTICS, ranking.get(Rank.FIFTH.name()), ranking.get(Rank.FORTH.name()),
-                ranking.get(Rank.THIRD.name()), ranking.get(Rank.SECOND.name()), ranking.get(Rank.FIRST.name()));
+        System.out.println(MessageConstant.WINNING_STATISTICS);
+
+        for(Rank rank : Rank.values()) {
+            if(rank.getMatchingCount()==0) continue;
+            if(rank.isBonus()) {
+                System.out.printf(MessageConstant.WINNING_RESULT, rank.getMatchingCount(),
+                        MessageConstant.RESULT_BONUS_WINNING, rank.getPrize(), ranking.get(rank.name()));
+                continue;
+            }
+            System.out.printf(MessageConstant.WINNING_RESULT, rank.getMatchingCount(),
+                    MessageConstant.RESULT_NO_BONUS_WINNING, rank.getPrize(), ranking.get(rank.name()));
+        }
     }
 
     public void printTotalProfit(String profit) {
