@@ -1,6 +1,7 @@
 package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.List;
 import lotto.util.InputValidation;
 
 public class InputView {
@@ -11,5 +12,11 @@ public class InputView {
         String input = Console.readLine();
 
         return inputValidation.validatePurchaseAmount(input);
+    }
+
+    public List<Integer> inputWinNumbers() {
+        String input = Console.readLine();
+
+        return inputValidation.validateWinNumbers(input);
     }
 }
