@@ -1,12 +1,23 @@
 package lotto.util;
 
 import static lotto.constant.ErrorMessage.INPUT_AMOUNT_UNIT;
+import static lotto.constant.ErrorMessage.INPUT_CORRECT_SEPARATOR;
+import static lotto.constant.ErrorMessage.INPUT_DUPLICATE;
 import static lotto.constant.ErrorMessage.INPUT_NULL;
 import static lotto.constant.ErrorMessage.INPUT_NUMBER;
 import static lotto.constant.ErrorMessage.INPUT_POSITIVE_NUMBER;
+import static lotto.constant.ErrorMessage.LIMIT_LOTTO_NUMBER;
 import static lotto.constant.ErrorMessage.LIMIT_PURCHASE_AMOUNT;
+import static lotto.constant.NumberConstant.MAX_LOTTO_NUMBER;
 import static lotto.constant.NumberConstant.MAX_PURCHASE_AMOUNT;
+import static lotto.constant.NumberConstant.MIN_LOTTO_NUMBER;
 import static lotto.constant.NumberConstant.PURCHASE_UNIT;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class InputValidation {
 
@@ -18,6 +29,16 @@ public class InputValidation {
         validateLimit(number);
 
         return number;
+    }
+
+    public List<Integer> validateWinNumbers(String input) {
+        validateNull(input);
+        validateSeparator(input);
+        validateLottoNumberNumeric(input);
+        List<Integer> numbers = validateLimitLottoNumber(input);
+        validateDuplicateNumbers(numbers);
+
+        return numbers;
     }
 
     private void validateNull(String input) {
@@ -54,5 +75,43 @@ public class InputValidation {
         }
     }
 
-    private void
+    private void validateSeparator(String input) {
+        String deleteBlank = input.replaceAll(" ", "");
+        String deleteCharacters = deleteBlank.replaceAll("[0-9a-zA-Zㄱ-ㅎ가-힣,]", "");
+        if (!deleteCharacters.isEmpty()) {
+            throw new IllegalArgumentException(INPUT_CORRECT_SEPARATOR.getMessage());
+        }
+    }
+
+    private void validateLottoNumberNumeric(String input) {
+        String deleteCharacters = input.replaceAll("[0-9,]", "");
+        if(!deleteCharacters.isEmpty()) {
+            throw new IllegalArgumentException(INPUT_NUMBER.getMessage());
+        }
+    }
+
+    private List<Integer> validateLimitLottoNumber(String input) {
+        List<String> inputNumbers = Arrays.asList(input.split(","));
+        List<Integer> numbers = inputNumbers.stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        for (int number : numbers) {
+            if (number < MIN_LOTTO_NUMBER.getValue() || number > MAX_LOTTO_NUMBER.getValue()) {
+                throw new IllegalArgumentException(
+                        String.format(LIMIT_LOTTO_NUMBER.getMessage(), MIN_LOTTO_NUMBER.getValue(),
+                                MAX_LOTTO_NUMBER.getValue()));
+            }
+        }
+        return numbers;
+    }
+
+    private void validateDuplicateNumbers(List<Integer> numbers) {
+        Set<Integer> set = new HashSet<>();
+        for(int number : numbers) {
+            if(!set.add(number)) {
+                throw new IllegalArgumentException(INPUT_DUPLICATE.getMessage());
+            }
+        }
+    }
 }
