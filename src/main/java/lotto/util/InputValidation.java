@@ -3,6 +3,7 @@ package lotto.util;
 import static lotto.constant.ErrorMessage.INPUT_AMOUNT_UNIT;
 import static lotto.constant.ErrorMessage.INPUT_CORRECT_SEPARATOR;
 import static lotto.constant.ErrorMessage.INPUT_DUPLICATE;
+import static lotto.constant.ErrorMessage.INPUT_DUPLICATE_WIN_NUMBER;
 import static lotto.constant.ErrorMessage.INPUT_NULL;
 import static lotto.constant.ErrorMessage.INPUT_NUMBER;
 import static lotto.constant.ErrorMessage.INPUT_POSITIVE_NUMBER;
@@ -39,6 +40,13 @@ public class InputValidation {
         validateDuplicateNumbers(numbers);
 
         return numbers;
+    }
+
+    public int validateBonusNumber(String input) {
+        int bonusNumber = Integer.parseInt(input);
+        validateBonusNumberLimit(bonusNumber);
+
+        return bonusNumber;
     }
 
     private void validateNull(String input) {
@@ -85,7 +93,7 @@ public class InputValidation {
 
     private void validateLottoNumberNumeric(String input) {
         String deleteCharacters = input.replaceAll("[0-9,]", "");
-        if(!deleteCharacters.isEmpty()) {
+        if (!deleteCharacters.isEmpty()) {
             throw new IllegalArgumentException(INPUT_NUMBER.getMessage());
         }
     }
@@ -108,10 +116,24 @@ public class InputValidation {
 
     private void validateDuplicateNumbers(List<Integer> numbers) {
         Set<Integer> set = new HashSet<>();
-        for(int number : numbers) {
-            if(!set.add(number)) {
+        for (int number : numbers) {
+            if (!set.add(number)) {
                 throw new IllegalArgumentException(INPUT_DUPLICATE.getMessage());
             }
+        }
+    }
+
+    private void validateBonusNumberLimit(int bonusNumber) {
+        if (bonusNumber < MIN_LOTTO_NUMBER.getValue() || bonusNumber > MAX_LOTTO_NUMBER.getValue()) {
+            throw new IllegalArgumentException(
+                    String.format(LIMIT_LOTTO_NUMBER.getMessage(), MIN_LOTTO_NUMBER.getValue(),
+                            MAX_LOTTO_NUMBER.getValue()));
+        }
+    }
+
+    public void validateDuplicateWithWinNumbers(int bonusNumber, List<Integer> winNumbers) {
+        if (winNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(INPUT_DUPLICATE_WIN_NUMBER.getMessage());
         }
     }
 }
