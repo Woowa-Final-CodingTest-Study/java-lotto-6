@@ -3,6 +3,7 @@ package lotto.controller;
 import static lotto.constant.NumberConstant.PURCHASE_UNIT;
 import static lotto.constant.SystemMessage.PURCHASE_LOTTO;
 
+import java.util.List;
 import lotto.service.InputService;
 import lotto.service.LottoService;
 import lotto.view.OutputView;
@@ -16,6 +17,8 @@ public class MainController {
     public void run() {
         int purchasePrice = inputService.getPurchaseAmount();
         generateLottoNumbers(purchasePrice);
+        List<Integer> winNumbers = inputService.getWinNumbers();
+        int bonusNumber = inputService.getBonusNumber(winNumbers);
     }
 
     public void generateLottoNumbers(int purchasePrice) {
