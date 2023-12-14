@@ -8,8 +8,6 @@ import static lotto.constant.ErrorMessage.LIMIT_PURCHASE_AMOUNT;
 import static lotto.constant.NumberConstant.MAX_PURCHASE_AMOUNT;
 import static lotto.constant.NumberConstant.PURCHASE_UNIT;
 
-import camp.nextstep.edu.missionutils.Console;
-
 public class InputValidation {
 
     public int validatePurchaseAmount(String input) {
@@ -55,4 +53,6 @@ public class InputValidation {
                     String.format(LIMIT_PURCHASE_AMOUNT.getMessage(), MAX_PURCHASE_AMOUNT.getValue()));
         }
     }
+
+    private void
 }
