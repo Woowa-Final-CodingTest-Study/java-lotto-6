@@ -19,4 +19,10 @@ public class InputView {
 
         return inputValidation.validateWinNumbers(input);
     }
+
+    public int inputBonusNumber() {
+        String input = Console.readLine();
+
+        return inputValidation.validateBonusNumber(input);
+    }
 }
